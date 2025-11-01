@@ -38,8 +38,8 @@ function App() {
             <Route path="/support" element={<SupportPage />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
             <Route path="/orders" element={<OrdersPage />} />
-    
-              <Route path="*" element={<LoginAndSignup />} />
+
+              <Route path="/signup" element={<LoginAndSignup />} />
               <Route path="/login" element={<LoginAndSignup />} />
               <Route path="/admin" element={<AdminLogin />} />
               <Route path="/admin/dashboard" element={<Admin />} />
