@@ -87,8 +87,8 @@ function CartHome() {
               </div>
               <div className=" ">
                 {cart?.map((item) => {
-                  const rate = item.productId.rate || 0;
-                  const discount = item.productId.discount || 0;
+                  const rate = item?.productId?.rate || 0;
+                  const discount = item?.productId?.discount || 0;
 
                   // Calculate discounted price
                   const discountedPrice = rate - (rate * discount) / 100;
@@ -97,12 +97,12 @@ function CartHome() {
                     <CartItemCard
                       key={item._id}
                       id={item._id}
-                      name={item.productId.productName}
-                      brand={item.productId.brandName}
-                      image={item.productId.images[0]}
-                      productId={item.productId._id}
+                      name={item?.productId?.productName}
+                      brand={item?.productId?.brandName}
+                      image={item?.productId?.images[0]}
+                      productId={item?.productId?._id}
                       price={discountedPrice.toFixed(2)} // optional: round to 2 decimals
-                      qty={item.quantity}
+                      qty={item?.quantity}
                       onDelete={handleDelete}
                       onQuantityChange={handleQuantityChange}
                     />

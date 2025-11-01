@@ -264,9 +264,9 @@ export const getSearch = async (query) => {
 
 export const getSummery = async (userId) => {
   try {
-    const res = await axios.get(`${BASE_URL}users/summary/${userId}`);
+    const response = await axios.get(`${BASE_URL}users/summary/${userId}`);
 
-    return res.data
+    return response?.data
   } catch (error) {
     res.status(500).json(error)
   }
