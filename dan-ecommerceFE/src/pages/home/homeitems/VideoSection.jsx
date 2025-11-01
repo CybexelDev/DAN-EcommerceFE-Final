@@ -1,5 +1,5 @@
 import React, { useRef, useState} from 'react'
-import pause from "../../../assets/images/videosection/pause.png"
+import pause from "../../../assets/images/videosection/Pause.png"
 import play from "../../../assets/images/videosection/play.png"
 import topicon from "../../../assets/images/components/toprightarrowcircle.png"
 import vid from "../../../assets/videos/video5.mp4"
