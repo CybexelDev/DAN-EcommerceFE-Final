@@ -7,6 +7,9 @@ import {
   verifyMobilLogin,
 } from "../../API/userApi";
 import RightInfo from "./RightInfo";
+import { useNavigate } from "react-router-dom";
+// import { login } from "../../redux/app/store";
+
 
 const LoginForm = () => {
   const [step, setStep] = useState(1);
@@ -18,6 +21,9 @@ const LoginForm = () => {
 
   const isEmail = (input) => /\S+@\S+\.\S+/.test(input);
   const isMobile = (input) => /^[0-9]{6,15}$/.test(input);
+
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +65,7 @@ const LoginForm = () => {
       setError("OTP verification failed.");
     }
   };
+
 
   return (
   <div className="flex flex-col lg:flex-row justify-between items-stretch gap-[2vw]   ">

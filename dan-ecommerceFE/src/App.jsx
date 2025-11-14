@@ -18,20 +18,30 @@ import OrdersPage from './pages/orders/Orders';
 
 
 function App() {
-  // const [count, setCount] = useState(0)
-    const { username, accessToken, isLoggedIn } = useSelector((state) => state.auth);
-   console.log(username, accessToken, isLoggedIn , "99999999999999999999999999999");
+
+  const [count, setCount] = useState(0)
+    const { username, accessToken, isLoggedIn, } = useSelector((state) => state.auth);
+     const {adminToken} = useSelector((state) => state.adminLogin);
+
+   console.log(adminToken , "99999999999999999999999999999" );
 
   const token = localStorage.getItem("accessToken");
 
   return (
     <Router>
       <Routes>
-        {token ? (
-          <>
-            <Route path="*" element={<Home />} />
+
+        
+        {adminToken? <Route path="/admin/dashboard" element={<Admin />} />  :  <Route path="/admin" element={<AdminLogin />} />}
+            
+            
+
+
+            {/* <Route path="*" element={<Home />} /> */}
+
             <Route path="/" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/collections/:id" element={<CollectionsPage />} />
             <Route path="/collections" element={<CollectionsPage />} />
             <Route path="/cart" element={<CartHome />} />
             <Route path="/address" element={<ProfileAndAddress />} />
@@ -39,17 +49,9 @@ function App() {
             <Route path="/support" element={<SupportPage />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
             <Route path="/orders" element={<OrdersPage />} />
-          </>
-        ) :
-          (
-            <>
-              <Route path="*" element={<LoginAndSignup />} />
-              <Route path="/login" element={<LoginAndSignup />} />
-              <Route path="/admin" element={<AdminLogin />} />
-              <Route path="/admin/dashboard" element={<Admin />} />
-            </>
-          )
-        }
+            <Route path="/login" element={<LoginAndSignup />} />
+            <Route path="/admin" element={<AdminLogin />} />
+     
       </Routes>
     </Router>
 

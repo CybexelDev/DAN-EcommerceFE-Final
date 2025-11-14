@@ -21,6 +21,7 @@ function ProfileAndAddress() {
       <div className="w-full  flex flex-col lg:flex-row justify-between gap-[2vw] mb-[2vw]">
         {/* Left Section */}
         <div className="lg:w-[63%]  w-full  flex flex-col gap-[12vw] md:gap-[10vw] lg:gap-[2vw]">
+
           <ProfileSection />
           <AddressSection />
         </div>

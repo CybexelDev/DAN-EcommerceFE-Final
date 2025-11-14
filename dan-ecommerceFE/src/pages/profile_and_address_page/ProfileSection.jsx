@@ -21,6 +21,7 @@ function ProfileSection() {
     // Clear localStorage
     localStorage.removeItem("userName");
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("userId");
 
     // Clear redux state
     dispatch({ type: "LOGOUT" });

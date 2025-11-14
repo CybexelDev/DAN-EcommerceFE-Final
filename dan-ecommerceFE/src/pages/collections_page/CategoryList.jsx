@@ -1,31 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { CgArrowTopRight, CgArrowBottomLeft } from 'react-icons/cg';
-import { getcategory } from '../../API/userApi';
 
-function CategoryList({ onFirstCategorySelect }) {
-  const [categories, setCategories] = useState([]);
-  const [openSubcategory, setOpenSubCategory] = useState(null);
+import React, { useEffect, useState } from 'react'
+import { CgArrowTopRight } from 'react-icons/cg';
+import { CgArrowBottomLeft } from "react-icons/cg";
+import { getcategory, getCategorybasedProduct, getSubCategories, } from '../../API/userApi';
+
+function CategoryList({ onFirstCategorySelect, id, sndSubcategoryId }) {
+  const [category, setCategory] = useState([])
+
+  const [openSubcategory, setOpenSubCategory] = useState(null)
+
+  const [subcategoryId, setSubcategoryId] = useState(null);
+
+  // const [displayCategory, setDisplayCategory] = useState('');
+  const [firstCategoryId, setFirstCategoryId] = useState('');
+
+
 
   useEffect(() => {
-    getcategory(setCategories);
-  }, []);
+    getcategory(setCategory);
+  }, [])
+
+
+  // const getSubCategory = async (subCategoryId) => {
+  //   try {
+
+  //     const data = await getSubCategories(subCategoryId);
+
+  //     console.log(data, "subcategoryyyy");
+
+  //   } catch (error) {
+
+  //   }
+  // }
+
 
   // Send default (first) category once on load
   useEffect(() => {
-    if (categories.length > 0) {
-      const firstId = categories[0]._id;
-      const firstName = categories[0].category;
-      onFirstCategorySelect(firstId, firstName);
+
+    if (category.length > 0) {
+      if (id) {
+        const selectedCategory = category.find(item => item._id === id);
+        onFirstCategorySelect(selectedCategory._id, selectedCategory.category);
+      } else {
+
+        const firstId = category[0]._id;
+        const firstCategoryName = category[0].category
+        onFirstCategorySelect(firstId, firstCategoryName);
+      }
+
     }
   }, [categories]);
 
-  const handleCategoryClick = (id, name) => {
+  const handleCategoryClick = (id, category) => {
     setOpenSubCategory((prev) => (prev === id ? null : id));
-    onFirstCategorySelect(id, name);
+
+    onFirstCategorySelect(id, category); // send clicked id to parent
   };
 
-  const toggleSubCategory = (e, id) => {
-    e.stopPropagation(); // prevent parent click
+
+   const getSubCategory = (subCategoryId) => {
+    try {
+      const id = subCategoryId;
+       sndSubcategoryId(id);
+    } catch (error) {
+      console.error("Error fetching subcategory:", error);
+    }
+  }
+
+
+  const toggleSubCategory = (id) => {
     setOpenSubCategory((prev) => (prev === id ? null : id));
   };
 
@@ -57,24 +100,24 @@ function CategoryList({ onFirstCategorySelect }) {
               </button>
             </div>
 
-            {/* Category Name */}
-            <div className="pl-[5%] py-[0.3rem] text-[.9rem] md:text-[1.3rem] lg:text-[1.6rem]">
-              <h5 className="text-[#F2591A] font-semibold truncate">{item?.category?.toUpperCase()}</h5>
+            <div className="pl-[5%] py-[0.3rem] text-[.9rem] md:text-[1.3rem] lg:text-[1.6rem] cursor-pointer transition-all duration-500  ease-in-out">
+              <h5 className='text-[#F2591A] font-semibold truncate'>{item?.category?.toUpperCase()}</h5>
+            </div>
+            <div className={`w-full overflow-hidden transition-all duration-500 ease-in-out ${openSubcategory === item._id ? "max-h-[50vh] opacity-100" : "max-h-0 opacity-0"
+              }`}>
+              {openSubcategory === item._id ?
+                <ul className="pl-[6%] mt-[vw] flex flex-col gap-[.3vw] text-[.8rem] md:text-[1.2rem] lg:text-[1.4rem] font-semibold  text-black/80">
+                  {item.subCategories.map((sub, index) => (
+                    <li onClick={() => getSubCategory(sub._id)} key={index} className='w-full items-center  py-[0.3vw] flex hover:text-[#F2591A] cursor-pointer'>
+                    {sub.name?.length > 20 ? sub.name.slice(0, 20) + '…' : sub.name.toUpperCase()}
+                    </li>
+                  ))}
+                </ul> :
+                <div className=""></div>}
+
             </div>
 
-            {/* Subcategory List */}
-            {openSubcategory === item._id && item.subCategories?.length > 0 && (
-              <ul className="pl-[6%] mt-[vw] flex flex-col gap-[.3vw] text-[.8rem] md:text-[1.2rem] lg:text-[1.4rem] font-semibold  text-black/80">
-                {item.subCategories.map((sub, index) => (
-                  <li
-                    key={index}
-                    className="w-full flex items-center py-[0.3vw] "
-                  >
-                    {sub.name?.length > 20 ? sub.name.slice(0, 20) + '…' : sub.name.toUpperCase()}
-                  </li>
-                ))}
-              </ul>
-            )}
+          
           </div>
         ))}
       </div>

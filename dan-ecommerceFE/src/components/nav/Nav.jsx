@@ -3,11 +3,13 @@ import logo from "../../assets/images/home/logo.png"
 import { FaSearch } from "react-icons/fa";
 import { FaShoppingBasket, FaUser, FaBox } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import SubNav from './SubNav';
 
 function Nav() {
 
   const navigate = useNavigate();
   return (
+
     <div className=' nav absolute flex top-[2.6vw] left-[1vw]  w-[42.5%]    aspect-[100%/11%]  z-20]'>
       <div className='w-[23%]   rounded-tl-2xl pl-[4%] py-[1%]'>
         <img onClick={() => navigate('/')} src={logo} alt="logo" className='w-full h-full cursor-pointer' />
@@ -23,9 +25,10 @@ function Nav() {
             <li className='text-[1.2vw] cursor-pointer' onClick={() => navigate('/cart')}><FaShoppingBasket /></li>
             <li className='text-[1.2vw] cursor-pointer' onClick={() => navigate('/orders')}><FaBox /></li>
           </ul>
+          </div>
         </div>
       </div>
-    </div>
+  
   )
 }
 

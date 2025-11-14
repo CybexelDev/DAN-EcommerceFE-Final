@@ -7,19 +7,25 @@ import searchicon from "../../assets/images/collections_page/searchicon.png"
 import ProductList from './ProductList'
 import CategoryList from './CategoryList'
 import { getCategorybasedProduct, getSearch, getCategorys } from '../../API/userApi'
+import { getCategorybasedProduct, getSearch, getSubCategories } from '../../API/userApi'
 import { useNavigate } from "react-router-dom";
 import Footer from '../home/homeitems/Footer';
+import { useParams } from "react-router-dom";
+import SubNav from '../../components/nav/SubNav'
 
 function CollectionsPage() {
-    const [isCategoryOpen, setIsCategoryOpen] = useState(true)
+    const [isCategoryOpen, setIsCategoryOpen] = useState(true);
     const [products, setProducts] = useState([]);
     const [firstCategoryId, setFirstCategoryId] = useState("");
     const [totalProducts, setTotalProducts] = useState(0);
-    const [selectedCategoryName, setSelectedCategoryName] = useState("")
+    const [selectedCategoryName, setSelectedCategoryName] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
+    const [subcategoryId, setSubcategoryId] = useState(null);
 
-    console.log( selectedFilter, "selcted Fileterrrr");
-    
+    const { id } = useParams();
+
+    // console.log(products, "selected sub CategoryNameeeeeeeeee%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5");
+    // console.log( selectedFilter, "selcted Fileterrrr");
     // search
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
@@ -149,6 +155,31 @@ useEffect(() => {
     }, [firstCategoryId]);
 
 
+
+    useEffect(() => {
+        if (subcategoryId) {
+            const getSubCategory = async () => {
+                try {
+                    const data = await getSubCategories(subcategoryId);
+                    setProducts(data);
+                    console.log(data, "subcategoryyyy");
+                } catch (error) {
+                    console.error("Error fetching subcategory products:", error);
+                }
+            };
+            getSubCategory(); // ✅ call the function here
+        }
+
+    }, [subcategoryId]);
+
+
+    if (id) {
+        useEffect(() => {
+            setFirstCategoryId(id);
+        }, [id])
+    }
+
+
     // callback function to receive from child
     const handleCategoryId = (id, selectedCategoryName) => {
         setFirstCategoryId(id);
@@ -156,9 +187,16 @@ useEffect(() => {
         console.log("Received from child:", id, selectedCategoryName);
     };
 
+
+    const handleSubcategory = (subcategoryId) => {
+        setSubcategoryId(subcategoryId);
+    }
+
+
     // end of selected option
     const sortOptions = ["Popularity", "Newest", "Best Rated", "Price: High to Low", "Price: Low to High"];
     return (
+
         <div className='mx-[0%] '>
             <div className='relative  w-full  pt-[5%]  lg:pt-[10.9%] mb-[3vw]  '>
                 <div className="hidden lg:block">
@@ -167,7 +205,9 @@ useEffect(() => {
                 <div className="block lg:hidden ">
                     <MobileNav />
                 </div>
+           <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
                 <div className="w-full h-full px-[3%]  ">
+
                     {/* Top bar Section  */}
                     <div className={`w-full h-[4.98%]  flex justify-between  ${isCategoryOpen ? 'pl-[0%] md:pl-[34.5%] lg:pl-[33.7%]  xl:pl-[28%] pr-[0%]' : 'pl-[0%]  pr-[0%] '
                         }`}>
@@ -317,6 +357,7 @@ useEffect(() => {
                                     <div className="w-full h-[2.5%] md:h-[5.9%]  "> <h5 className='text-[#6C090E] text-[4vw] md:text-[2.3vw] text-center font-semibold'>Categories</h5></div>
                                     <div className="w-full h-[97.1%]  rounded-[1.5vw] py-[5%] bg-[#f4f4f4]">
                                         <CategoryList onFirstCategorySelect={handleCategoryId} isCategoryOpen={isCategoryOpen} />
+
                                     </div>
 
                                     {/* List category end */}

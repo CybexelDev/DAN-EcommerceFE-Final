@@ -91,6 +91,7 @@ function ProductDetail() {
         // const userId = "68c7c33bea2c350bb430b20d";
         const data = await addCart(userId, productId, quantity);
         console.log("Cart updated:", data);
+        setQuantity(1); 
         alert("Product added to cart!");
     }
 
@@ -216,6 +217,8 @@ function ProductDetail() {
                             />
                           </div>
                         </div>
+
+
 
                         {/* Main product image */}
                         <img
@@ -347,6 +350,7 @@ function ProductDetail() {
                                     {/* End of button section */}
                                 </div>
 
+
                                {/* Description Section */}
                                 <div
                                     className={`w-full flex flex-col justify-between transition-all duration-500 ${
@@ -355,6 +359,7 @@ function ProductDetail() {
                                   >
                                     <div className="w-full my-[1rem]">
                                       <h5 className="text-[1.5rem] font-semibold">Description</h5>
+
                                     </div>
 
                                     {/* ✅ Auto-expand on small screens, toggle on desktop */}
@@ -370,6 +375,7 @@ function ProductDetail() {
                                       <p className="text-[1.1rem] text-black/65 leading-[1.8] whitespace-pre-line">
                                         {description}
                                       </p>
+
                                     </div>
 
                                     {/* ✅ Show button only on desktop */}

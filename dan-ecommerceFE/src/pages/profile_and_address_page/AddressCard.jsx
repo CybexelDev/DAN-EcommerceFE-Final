@@ -30,10 +30,13 @@ function AddressCard({
                  after:content-[''] after:absolute after:w-[1vw] after:h-[1vw] after:z-10 after:bg-[radial-gradient(circle_at_bottom_left,transparent_0%,_transparent_70%,#0000000D_71%,#0000000D_100%)]
                  after:-bottom-[1vw] after:-right-[0vw]">
         <button
-          onClick={isSelected ? onChange : onDelete}
+
+         // onClick={isSelected ? onChange : onDelete}
+          onClick={onDelete}
           className="w-[88.28%] h-[56.66%] bg-[#D8D8D8] font-semibold text-[4vw] md:text-[3vw] lg:text-[1.3vw] text-center rounded-full hover:text-red-500 hover:scale-105 transition-all duration-300 ease-in-out"
         >
-          { isSelected ? "change" : "Delete" }
+      {/* isSelected ? "change" : "Delete" */}
+          Delete
         </button>
       </div>
 

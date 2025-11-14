@@ -343,8 +343,9 @@ export const deleteAddress = async (userId, addressId) => {
 };
 
 
-export const checkoutSession = async (body) => {
 
+
+export const checkoutSession = async (body) => {
   try {
     const response = await axios.post(`${BASE_URL}users/create-checkout-session`,
       body,
@@ -354,7 +355,6 @@ export const checkoutSession = async (body) => {
         },
       }
     );
-
     console.log(response.data);
     return response;
   } catch (error) {
@@ -384,5 +384,32 @@ export const getCategoryPopularProduct = async (categoryId) => {
   } catch (error) {
     logger.error("Error fetching category popular product:", error);
     console.log(error);
+  }
+};
+
+
+export const getSubCategories = async (subCategoryId) => {
+  try {
+    const res = await axios.get(`${BASE_URL}users/getSubcategory/${subCategoryId}`);
+
+    return res.data;
+  }
+  catch (error) {
+    res.status(500).json(error)
+  }
+};
+
+
+export const saveOredr = async (sessionId, userId, address) => {
+  try {
+    const res = await axios.post(`${BASE_URL}users/PaymentSuccess`, {
+      sessionId,
+      userId,
+      address,
+    });
+    return res.data;
+  }
+  catch (error) {
+    res.status(500).json(error)
   }
 };

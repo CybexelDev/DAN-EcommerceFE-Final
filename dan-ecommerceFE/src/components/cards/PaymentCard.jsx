@@ -5,32 +5,53 @@ import { loadStripe } from "@stripe/stripe-js";
 import aedicon from "../../assets/images/main/aedicon.png"
 
 function PaymentCard({ userIds, cart }) {
-  const { userId } = useSelector((state) => state.auth);
-  const [tottelAmmount, setTotelAmmount] = useState("");
-  const [discountRate, setDiscountRate] = useState("");
-  const [voucherDiscount, setVoucherDiscount] = useState("");
-  const [code, setCode] = useState("");
-  const [productCart, setProductCart] = useState([]);
 
-  useEffect(() => {
-    const fetchTotal = async () => {
-      const data = await getSummery(userId);
-      setTotelAmmount(data.totalDiscountedPrice);
-      setDiscountRate(data.totalSavings);
-      setProductCart(data.cart);
-    };
-    fetchTotal();
-  }, [userId, userIds, cart]);
+    const { userId } = useSelector((state) => state.auth);
+    const [Summary, setSummery] = useState({});
+    const [tottelAmmount, setTotelAmmount] = useState('');
+    const [discountRate, setDiscountRate] = useState('');
+    const [voucherDiscount, setVoucherDiscount] = useState('');
+    const [code, setCode] = useState('');
+    const [productCart, setProductCart] = useState([]);
+    const address = useSelector((state) => state.deliveryAddress);
 
-  const fetchVoucher = async () => {
-    try {
-      if (!code) return console.log("Please enter a voucher code");
-      const data = await applayVoucher(code, tottelAmmount);
-      setTotelAmmount(data.finalAmount);
-      setVoucherDiscount(data?.discount);
-    } catch (error) {
-      console.log(error, "error in voucher >>>>>>>");
-    }
+    console.log(address, "redux adresssssssssssssssssssssss");
+    
+
+    // console.log(productCart, "code data >>>>>>>00000000000000000000");
+
+
+    // console.log(Summary, "summary data >>>>>>>00000000000000000000");
+
+
+    useEffect(() => {
+        const fetchTotal = async () => {
+            const data = await getSummery(userId);
+            // console.log(data, "total ammount data >>>>>>> uuuuuuuuuuuuuuuuuu");
+            
+            setTotelAmmount(data.totalDiscountedPrice);
+            setDiscountRate(data.totalSavings)
+            setProductCart(data.cart);
+        }
+        fetchTotal();
+
+    }, [userId, userIds, cart]);
+
+
+    const fetchVoucher = async () => {
+        try {
+            if (!code) {
+                // console.log("Please enter a voucher code");
+                return;
+            }
+            const data = await applayVoucher(code, tottelAmmount);
+            setTotelAmmount(data.finalAmount)
+            setVoucherDiscount(data?.discount)
+            console.log(data, "voucher data >>>>>>>");
+
+        } catch (error) {
+            console.log(error, "error in voucher >>>>>>>");
+        }
   };
 
   const stripePromise = loadStripe(
@@ -39,6 +60,12 @@ function PaymentCard({ userIds, cart }) {
 
   const makePayment = async () => {
     try {
+        
+        if(address._id === null || address._id === undefined){
+            alert("Please select a delivery address before proceeding to payment.");
+            return;
+        }
+
       const stripe = await stripePromise;
       const body = { products: productCart };
       const response = await checkoutSession(body);

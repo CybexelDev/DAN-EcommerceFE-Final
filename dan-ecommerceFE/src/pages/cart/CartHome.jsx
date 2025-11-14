@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import Nav from '../../components/nav/Nav';
-import PaymentCard from '../../components/cards/PaymentCard';
-import CartItemCard from './CartItemCard';
-import { getCart, removeCart, updateQuantity } from '../../API/userApi';
-import Footer from '../home/homeitems/Footer';
+
+import React, { useEffect, useState } from 'react'
+import Nav from '../../components/nav/Nav'
+import PaymentCard from '../../components/cards/PaymentCard'
+import CartItemCard from './CartItemCard'
+import cartItemImage from "../../assets/images/collections_page/drinkpurple.png"
+import cartItemImage2 from "../../assets/images/collections_page/drinkgreen.png"
+import { getCart, removeCart, updateQuantity } from '../../API/userApi'
+import Footer from '../home/homeitems/Footer'
+import SubNav from '../../components/nav/SubNav'
 import MobileNav from '../../components/nav/MobileNav';
 import { useNavigate } from 'react-router-dom';
+
 
 function CartHome() {
   const [cart, setCart] = useState([]);
   const userId = localStorage.getItem("userId");
   const navigate = useNavigate()
+  const [renderKey, setRenderKey] = useState(0);
+
   const fetchCart = async () => {
     const data = await getCart(userId);
     setCart(data);
@@ -24,6 +31,7 @@ function CartHome() {
     const data = await removeCart(productId, userId);
     if (data.message === "Item removed from cart successfully") {
       fetchCart();
+      setRenderKey(prev => prev + 1);
     }
   };
 
@@ -35,7 +43,10 @@ function CartHome() {
     );
 
     try {
-      await updateQuantity(userId, id, newQty);
+
+      const data = await updateQuantity(userId, id, newQty)
+      setRenderKey(prev => prev + 1);
+      console.log(data, 'product Qty upadate');
     } catch (error) {
       console.error("Error updating quantity:", error);
     }
@@ -51,7 +62,7 @@ function CartHome() {
         <div className="block lg:hidden">
           <MobileNav />
         </div>
-
+      <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
         {/* Header */}
         <div className="w-full pt-[10vw]">
           <h5 className="font-bold text-[clamp(1.2rem,2.1vw,2rem)] mb-[2vw]">Shopping Cart.</h5>
@@ -105,9 +116,10 @@ function CartHome() {
             </div>
           </div>
 
+
           {/* Payment Card */}
           <div className="w-full lg:w-[32.5%] flex justify-center mt-[5vw] lg:mt-0 p-[3%] md:p-[0%]">
-            <PaymentCard userIds={userId} cart={cart} />
+             <PaymentCard key={renderKey} userIds={userId} cart={cart} />
           </div>
         </div>
 

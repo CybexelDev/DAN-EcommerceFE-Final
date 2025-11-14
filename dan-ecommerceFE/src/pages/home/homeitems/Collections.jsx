@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import CollectionHomeCard from "../../../components/cards/CollectionHomeCard";
 import { getCategorys } from "../../../API/userApi";
@@ -10,6 +11,7 @@ function Collections() {
   useEffect(() => {
     getCategorys(setData);
   }, []);
+
 
   return (
     <div className="w-full flex flex-col justify-center mb-[4vw]">
@@ -36,6 +38,7 @@ function Collections() {
           "
         >
           <p>View All &rarr;</p>
+
         </div>
       </div>
 
@@ -60,6 +63,7 @@ function Collections() {
             "
           >
             <CollectionHomeCard
+              click={() => navigate(`/collections/${item._id}`)}
               image={item.image[0]}
               category={item.category}
             />
