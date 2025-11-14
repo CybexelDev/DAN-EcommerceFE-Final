@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Send, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "../home/homeitems/Footer";
 import Nav from "../../components/nav/Nav";
+import MobileNav from "../../components/nav/MobileNav";
 
 const SupportPage = () => {
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -22,7 +23,12 @@ const SupportPage = () => {
 
     return (
         <>
-        <Nav />
+            <div className="hidden lg:block">
+                    <Nav />
+                </div>
+                <div className="block lg:hidden ">
+                    <MobileNav />
+                </div>
             <div className="min-h-screen bg-gradient-to-b from-white via-orange-50/40 to-white flex flex-col items-center pt-20 px-6 sm:px-10 mt-[100px]">
                 {/* Hero Section */}
                 <motion.div

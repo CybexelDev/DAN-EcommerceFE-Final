@@ -1,280 +1,179 @@
-import trucktrack from "../../assets/images/login/trucktrack.png"
-import alertbell from "../../assets/images/login/alertbell.png"
-import reviewstar from "../../assets/images/login/reviewstar.png"
-import greentick from "../../assets/images/login/greentick.png"
 import React, { useState } from "react";
-import { emailLogin, mobilLogin, verifyEmailLogin, verifyMobilLogin } from "../../API/userApi";
 import { useDispatch } from "react-redux";
-// import { login } from "../../redux/app/store";
+import {
+  emailLogin,
+  mobilLogin,
+  verifyEmailLogin,
+  verifyMobilLogin,
+} from "../../API/userApi";
+import RightInfo from "./RightInfo";
 
 const LoginForm = () => {
-  const [step, setStep] = useState(1); // 1 = email/phone input, 2 = OTP
-  const [value, setValue] = useState(""); // email or phone
+  const [step, setStep] = useState(1);
+  const [value, setValue] = useState("");
   const [otp, setOtp] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [error, setError] = useState("");
-
   const dispatch = useDispatch();
 
+  const isEmail = (input) => /\S+@\S+\.\S+/.test(input);
+  const isMobile = (input) => /^[0-9]{6,15}$/.test(input);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check email or phone
-    if (isEmail(value)) {
-      try {
-        // Example API call for email
-
-        const response = await emailLogin(value);
-        console.log(response, "email login response >>>>>>");
-        // await fetch("/api/send-otp-email", {
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/json" },
-        //   body: JSON.stringify({ email: value }),
-        // });
+    try {
+      if (isEmail(value)) {
+        await emailLogin(value);
         setStep(2);
-        setError("")
-      } catch {
-        setError("Error sending email OTP.");
-      }
-    } else if (isMobile(value)) {
-      try {
-        // Example API call for mobile
-        const response = await mobilLogin(value);
-        console.log(response, "mobile login response >>>>>>");
-
-
-        // await fetch("/api/send-otp-mobile", {
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/json" },
-        //   body: JSON.stringify({ mobile: value }),
-        // });
+      } else if (isMobile(value)) {
+        await mobilLogin(value);
         setStep(2);
-        setError("")
-      } catch {
-        setError("Error sending mobile OTP.");
-      }
-    } else {
-      setError("Please enter a valid email or mobile number.");
-    }
-  };
-
-  const handleChange = (e) => {
-    const input = e.target.value;
-
-    if (/^\d*$/.test(input)) {
-      setOtp(input)
-
-      if (input.length > 6) {
-        setError("OTP cannot be more than 6 digits");
       } else {
-        setError("")
+        setError("Please enter a valid email or mobile number.");
       }
-    } else {
-      setError("OTP must contain only numbers");
+    } catch {
+      setError("Error sending OTP. Try again.");
     }
   };
-
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
+    if (otp.length !== 6) return setError("OTP must be 6 digits");
 
-    if (otp.length !== 6) {
-      setError("Otp must be 6 digits")
+    try {
+      const response = isEmail(value)
+        ? await verifyEmailLogin(value, otp)
+        : await verifyMobilLogin(value, otp);
+
+      dispatch({
+        type: "SET_USER",
+        payload: {
+          username: isEmail(value)
+            ? response?.user?.email
+            : response?.user?.phone,
+          accessToken: response?.token,
+          userId: response?.user?._id || response?.user?.id,
+        },
+      });
+    } catch {
+      setError("OTP verification failed.");
     }
-
-    if (isEmail(value)) {
-      try {
-        const response = await verifyEmailLogin(value, otp);
-
-        console.log(response, "email otp verify response >>>>>>");
-
-        dispatch({
-          type: "SET_USER",
-          payload: {
-            username: response?.user?.email,
-            accessToken: response?.token,
-            userId: response?.user?.id,
-          },
-        });
-
-
-      } catch {
-        setError("OTP verification failed.");
-      }
-    } else if (isMobile(value)) {
-      try {
-        const response = await verifyMobilLogin(value, otp);
-
-        console.log(response, "mobile number otp verify response >>>>>>");
-
-          dispatch({
-          type: "SET_USER",
-          payload: {
-            username: response?.user?.phone,
-            accessToken: response?.token,
-            userId: response?.user?._id,
-          },
-        });
-
-      } catch {
-        setError("OTP verification failed.");
-      }
-    }
-
-  }
+  };
 
   return (
-    <div>
-      {step === 1 && (
-        <div className="flex justify-between">
-          <form
-            action=""
-            className="w-[55%] pt-[6%] px-[3%] pb-[1%] flex flex-col justify-start gap-[1vw]"
-            onSubmit={handleSubmit}
-          >
-            {/* Floating Input */}
-            <div className="relative mb-6 flex items-center justify-center">
+  <div className="flex flex-col lg:flex-row justify-between items-stretch gap-[2vw]   ">
+    {/* Left Form */}
+    <form
+      onSubmit={step === 1 ? handleSubmit : handleOtpSubmit}
+      className="w-full lg:w-[55%] flex flex-col justify-center pt-[6%] px-[%] pb-[3%] gap-[1.5rem] md:gap-[5vw] lg:gap-[2vw]"
+    >
+       {step === 1 ? (
+          <>
+            <div className="relative  flex items-center justify-center">
               <input
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                className="w-full h-[4vw] bg-[#E0E0E0] border-gray-400 rounded-[1vw]  
-                         outline-none pt-[3vw] pb-[2vw] pl-[1.5vw] text-[1.2vw]"
+                className="w-full h-[15vw] lg:h-[4.5vw] bg-white border-gray-400 rounded-[2vw] lg:rounded-[1vw]
+                           outline-none pt-[5vw] lg:pt-[4vw] xl:pt-[2.8vw] pb-[2vw] pl-[4vw] lg:pl-[1.5vw] text-[6vw] md:text-[5vw] lg:text-[2vw] xl:text-[1.7vw]"
               />
               <label
-                className={`absolute left-4 transition-all duration-200 
-                ${isFocused || value
-                    ? "text-[1vw] top-[.3vw] pl-[1vw]"
-                    : "text-[1vw]  top-1/2 -translate-y-1/2 p-[1vw]"
+                className={`absolute left-4 transition-all duration-200 text-[#484848]
+                  ${
+                    isFocused || value
+                      ? "text-[2.5vw] lg:text-[1vw] top-[.5vw] pl-[1vw]"
+                      : "text-[3.5vw] md:text-[2vwvw] lg:text-[1.3vw] xl:text-[1.1vw] font-semibold top-1/2 -translate-y-1/2 p-[1vw]"
                   }`}
               >
-                Enter Email/mobile number
+                Enter Email / Mobile number
               </label>
             </div>
 
-            {error && <div className="text-red-500 text-[1vw]">{error}</div>}
+            {error && <p className="text-[3.5vw] md:text-[3vw]  lg:text-[1.7vw] xl:text-[1vw] text-[#9E1818]">{error}</p>}
 
-            <div className="text-[1vw]">
-              By continuing, you agree the terms of use and privacy policy
-            </div>
+            <p className="text-[3.5vw] md:text-[3vw]  lg:text-[1.7vw] xl:text-[1vw]">
+              By continuing, you agree to our Terms of Use & Privacy Policy.
+            </p>
 
-            {/* Button */}
             <button
               type="submit"
-              className="w-[67%] bg-black text-[1.5vw] text-white p-[.5vw] rounded-[1vw] font-semibold 
-                       hover:brightness-110 transition"
+              className="w-[80%] lg:w-[67%] bg-black text-white text-[3.7vw] md:text-[3vw] lg:text-[1.5vw] xl:text-[1.3vw] py-[2vw] lg:py-[.7vw]
+                         rounded-[2vw] lg:rounded-[.7vw] font-semibold hover:brightness-110 transition self-center lg:self-start"
             >
-              Login
+              LOGIN
             </button>
-          </form>
-          <div className="w-[43%] h-full  flex flex-col justify-start  gap-[1vw]">
-            <div className="w-full aspect-[333/40] text-[#8F2A0B] font-semibold   flex items-center text-[1.4vw]">Advantages of secure login</div>
-            <div className="w-full aspect-[333/40] flex items-center justify-start gap-1  ">
-              <img src={trucktrack} className='w-[5.5%] aspect-square' alt="" />
-              <div className="flex items-center text-[1vw] ">Easily Track orders,Hasssle Free returns</div>
-            </div>
-            <div className="w-full aspect-[333/40]  flex items-center justify-start gap-1">
-              <img src={alertbell} className='w-[5.5%] aspect-square ' alt="" />
-              <div className="flex items-center  text-[1vw]">Get relevant alerts and recommendations</div>
-            </div>
-            <div className="w-full aspect-[333/40]  flex items-center justify-start gap-1">
-              <img src={reviewstar} className='w-[5.5%] aspect-square ' alt="" />
-              <div className="flex items-center  text-[1vw]">Wishlist, Reviews ,rating and more</div>
-            </div>
-          </div>
-        </div>
-
-      )}
-
-      {step === 2 && (
-        <div className=" flex justify-between">
-          <form
-            onSubmit={handleOtpSubmit}
-            className="w-[55%] pt-[6%] px-[3%] pb-[1%] flex flex-col gap-[1vw]"
-          >
-            {/* User entered email/mobile (read-only) */}
-            <input
+          </>
+        ) : (
+          <>
+            <div className="relative flex items-center justify-center">
+              <input
               type="text"
               value={value}
               readOnly
-              className="w-full h-[4vw] bg-gray-200 rounded-[1vw] p-[1vw] text-[1vw]"
+              className="w-full h-[12vw] lg:h-[6vw] xl:h-[5vw] bg-white rounded-[2vw] lg:rounded-[1vw] px-[5vw]  md:px-[3vw] lg:px-[2vw] pt-[3vw] md:pt-[2vw] lg:pt-[2vw] xl:pt-[.7vw]  text-[4vw] md:text-[1.8rem] lg:text-[2.5vw] xl:text-[1.5vw] "
             />
-
+            <label
+                className={`absolute left-4 transition-all duration-200 text-[#484848]
+                  ${
+                    isFocused || value
+                      ? "text-[2.5vw] lg:text-[1.5vw] xl:text-[.8vw] top-[.5vw] pl-[1vw]"
+                      : "text-[2.5vw] md:text-[2vw] lg:text-[1.3vw] xl:text-[1.1vw] font-semibold top-1/2 -translate-y-1/2 p-[1vw]"
+                  }`}
+              >
+                Enter Email / Mobile number
+              </label>
+            </div>
+            
 
             <div className="relative w-full">
               <input
                 type="text"
                 value={otp}
-                onChange={handleChange}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                 maxLength={6}
-                placeholder="Enter OTP"
-                className="w-full h-[4vw] bg-[#E0E0E0] rounded-[1vw] p-[1vw] pr-[6vw] text-[1vw]"
-              // notice pr-[6vw] → gives space so text doesn't overlap button
+                className="w-full h-[12vw] lg:h-[6vw] xl:h-[5vw] bg-white rounded-[2vw] lg:rounded-[1vw] px-[5vw]  md:px-[3vw] lg:px-[2vw] pt-[3vw] md:pt-[2vw] lg:pt-[2vw] xl:pt-[.7vw] text-[4vw] md:text-[1.8vw] lg:text-[2.5vw] xl:text-[1.5vw] "
               />
-
-              {/* Resend OTP inside input */}
+              <label
+                className={`absolute left-4 transition-all duration-200 text-[#484848]
+                  ${
+                    isFocused || value
+                      ? "text-[2.5vw] lg:text-[1.5vw] xl:text-[.8vw] top-[.5vw] pl-[1vw]"
+                      : "text-[2.5vw] md:text-[2vw] lg:text-[1.3vw] xl:text-[1.1vw] font-semibold top-1/2 -translate-y-1/2 p-[1vw]"
+                  }`}
+              >
+                Enter OTP
+              </label>
               <button
                 type="button"
-                onClick={() => handleSubmit(new Event("submit"))}
-                className="absolute right-[1vw] top-1/2 -translate-y-1/2 text-blue-500 underline text-[1vw]"
+                onClick={handleSubmit}
+                className="absolute right-[3vw] lg:right-[1vw] top-1/2 -translate-y-1/2 text-[#9E1818] font-semibold text-[3vw] md:text-[2.5vw] lg:text-[2vw] xl:text-[1vw] "
               >
-                Resend OTP
+                Resend ?
               </button>
             </div>
 
-            <div className="text-[1vw]">By continuing, you agree the terms of use and privacy policy</div>
+            {error && <p className="text-red-500 text-[.9rem]">{error}</p>}
 
-
-            {error && <div className="text-red-500 text-[1vw]">{error}</div>}
-
-            {/* Submit OTP */}
             <button
               type="submit"
-              className="w-[67%] bg-black text-[1.5vw] text-white p-[.5vw] rounded-[1vw] font-semibold 
-                        hover:brightness-110 transition"
+              className="w-[80%] lg:w-[67%] bg-black text-white md:text-[3.5vw] lg:text-[1.5vw] py-[3vw] lg:py-[.7vw]
+                         rounded-[2vw] lg:rounded-[.7vw] font-semibold hover:brightness-110 transition self-center lg:self-start"
             >
-              Login
+              LOGIN
             </button>
+          </>
+        )}
+      
+    </form>
 
-
-          </form>
-          <div className="w-[43%] h-full  flex flex-col justify-start  gap-[1vw]">
-            <div className="w-full aspect-[333/40] text-[#8F2A0B] font-semibold   flex items-center text-[1.4vw]">Advantages of secure login</div>
-            <div className="w-full aspect-[333/40] flex items-center justify-start gap-[1vw]  ">
-              <img src={trucktrack} className='w-[5.5%] aspect-square' alt="" />
-              <div className="flex items-center text-[1vw] ">Easily Track orders,Hasssle Free returns</div>
-            </div>
-            <div className="w-full aspect-[333/40]  flex items-center justify-start gap-[1vw]">
-              <img src={alertbell} className='w-[5.5%] aspect-square ' alt="" />
-              <div className="flex items-center  text-[1vw]">Get relevant alerts and recommendations</div>
-            </div>
-            <div className="w-full aspect-[333/40]  flex items-center justify-start gap-1">
-              <img src={reviewstar} className='w-[5.5%] aspect-square ' alt="" />
-              <div className="flex items-center  text-[1vw]">Wishlist, Reviews ,rating and more</div>
-            </div>
-            <div className="pt-[2vw] w-full  aspect-[300/45] flex justify-between items-center">
-              <div className="h-[60%] aspect-square">
-                <img src={greentick} alt=""
-                  className="w-full h-full" />
-              </div>
-              <div className="w-[90%] h-full text-[1vw]">
-                Safe and secure payments. Easy returns. <br />100% authentic products
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+    {/* Right Info */}
+    <div className="w-full mt-[5vw] lg:mt-[0vw] lg:w-[45%] flex items-center">
+      <RightInfo step={step} />
     </div>
-  );
+  </div>
+);
 };
 
 export default LoginForm;
-
-// utils
-const isEmail = (input) => /\S+@\S+\.\S+/.test(input);
-// const isMobile = (input) => /^[0-9]{10}$/.test(input);
-const isMobile = (input) => /^(\+91[0-9]{10}|\+971[0-9]{9})$/.test(input);
-

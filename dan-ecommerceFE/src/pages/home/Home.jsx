@@ -12,28 +12,28 @@ import Footer from './homeitems/Footer'
 function Home() {
   return (
     <div className='px-[3.8%] pt-[3%]  bg-white w-full h-[100]'>
-      <div className="pb-[4%]">
+      <div className="md:pb-[4%] pb-[7%] ">
         <Hero />
       </div>
-      <div className="">
+      <div className="pb-[2%]">
         <MostPopular />
       </div>
-      <div className="">
+      <div className="md:pb-[4%] pb-[7%] ">
         <Testimonal />
       </div>
-      <div className="">
+      <div className="md:pb-[4%] pb-[7%] ">
         <Collections />
       </div>
-      <div className="">
+      <div className="md:pb-[4%] pb-[10%]">
         <VideoSection />
       </div>
-      <div className="">
+      <div className="pb-[10%] md:pb-[5%]">
         <FeaturesSection />
       </div>
-      <div className="">
+      <div className="pb-[15%] md:pb-[5%]">
         <BlogSection />
       </div>
-      <div className="">
+      <div className="md:pb-[0%] pb-[17%]">
         <Footer/>
       </div>
     

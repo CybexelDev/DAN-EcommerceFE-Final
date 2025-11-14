@@ -4,6 +4,7 @@ import Nav from "../../components/nav/Nav";
 import { getOrders } from "../../API/userApi";
 import { useSelector } from "react-redux";
 import Footer from "../home/homeitems/Footer";
+import MobileNav from "../../components/nav/MobileNav";
 
 const mockOrders = [
   {
@@ -93,7 +94,12 @@ const mockOrders = [
 
   return (
     <>
-    <Nav />
+    <div className="hidden lg:block">
+                    <Nav />
+                </div>
+                <div className="block lg:hidden ">
+                    <MobileNav />
+                </div>
     <main className="min-h-screen bg-background p-6 mt-28">
       <div className="max-w-2xl mx-auto">
         <div className="mb-8">
