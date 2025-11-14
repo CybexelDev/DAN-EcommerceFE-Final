@@ -1,5 +1,6 @@
 import React from "react";
-import star from "../../../assets/images/testimonals/star.png";
+// import star from "../../../assets/images/testimonals/star.png";
+import star from "../../../assets/images/testimonals/goldstar.png";
 
 function TestimonialCard({ image, quote, rating, name }) {
   const renderStars = (rating) => {
@@ -27,7 +28,7 @@ function TestimonialCard({ image, quote, rating, name }) {
   };
 
   return (
-    <div className="w-full h-[69%] flex flex-col justify-between">
+    <div className="w-full h-[80%] flex flex-col justify-between items-between ">
       <div className="w-full h-[73%] flex flex-col justify-between">
         <div className="h-[42%] w-full flex justify-center">
           <div className="h-full aspect-square rounded-full">
@@ -39,15 +40,15 @@ function TestimonialCard({ image, quote, rating, name }) {
           </div>
         </div>
         <div className="w-full h-[48%] text-center px-[10%]">
-          <p className="text-[2.9vw] leading-[3vw]">{quote}</p>
+          <p className="text-[clamp(1.1rem,1.3vw,1.5rem)] lg:text-[clamp(2.1rem,2.3vw,2.5rem)] font-semibold">{quote}</p>
         </div>
       </div>
-      <div className="w-full h-[18%] flex flex-col justify-between">
-        <div className="h-[33%] text-center flex justify-center gap-[.3vw]">
+      <div className="w-full h-[18%] lg:mt-[40px] flex flex-col justify-between ">
+        <div className="h-[33%] text-center  flex justify-center gap-[.3vw]">
           {renderStars(rating)}
         </div>
-        <div className="h-[59%] text-center flex justify-center items-center">
-          <h4 className="text-[2vw]">{name}</h4>
+        <div className="h-[59%] text-center flex justify-center items-center mt-[.7vw] ">
+          <h4 className="text-[clamp(1.1rem,1.3vw,1.5rem)] lg:text-[clamp(.9rem,1.1vw,1.3rem)] text-black/55">{name}</h4>
         </div>
       </div>
     </div>

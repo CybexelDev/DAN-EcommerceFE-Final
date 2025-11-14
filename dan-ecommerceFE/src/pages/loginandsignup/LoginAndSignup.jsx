@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Nav from "../../components/nav/Nav";
 import leftarrow from "../../assets/images/login/leftarrow.png";
 import LoginForm from "./LoginForm";
-import PaymentCard from "../../components/cards/PaymentCard";
+import { FaUser } from "react-icons/fa";
 import LoginSignupToggleCard from "./LoginSignupToggleCard";
 import SignupForm from "./SignupForm";
+import MobileNav from "../../components/nav/MobileNav";
 
 function LoginAndSignup() {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,29 +15,39 @@ function LoginAndSignup() {
   };
 
   return (
-    <div className="relative w-full aspect-[1440/910]  pr-[5.48%]  pl-[3.62%] pt-[10vw] pb-[10vw] bg-white">
-      <Nav />
-      <div className="w-full h-full  flex sm:flex-row flex-col justify-between">
-        <div className=" sm:w-[63.56%] w-[100%] h-full flex flex-col justify-between ">
+    <div className="relative w-full flex flex-col gap-[0vw]   pr-[5.48%]  pl-[3.62%] pt-[10vw] pb-[10vw]">
+
+
+      {/* Navbar Section start */}
+      <div className="hidden lg:block">
+        <Nav />
+      </div>
+      <div className="block lg:hidden ">
+          <MobileNav />
+      </div>
+      {/* Navbar Section end */}
+
+      {/* Main Section Start */}
+      <div className="w-full h-full flex xl:flex-row  flex-col justify-between ">
+        <div className=" xl:w-[67%] w-full xl:h-[85%]   flex flex-col xl:justify-between justify-start gap-[7%] ">
           {/* Form Section start */}
           <div
-            style={{ boxShadow: "0px 1px 102px 0px rgba(167, 167, 167, 0.25)" }}
-            className=" relative w-full  rounded-[1.5vw] pt-[3.3vw] pr-[3%] pl-[3.6%] pb-[3%] bg-[#ffffff] "
+            className=" relative w-full aspect-[832/275]   rounded-[1.5vw] px-[5%] py-[12%] md:py-[5%] lg:py-[3%] bg-[#efefef] shadow-md "
           >
             {/* Top sticky section no 1 */}
             <div
-              className="absolute top-0 left-0 w-[28%] aspect-[233/51] rounded-br-[1.5vw] bg-[#e0e0e0] flex items-center justify-center
-                    before:content-['']  before:absolute before:w-[1.5vw] before:h-[1.5vw] before:z-10 before:bg-[radial-gradient(circle_at_bottom_right,transparent_0%,_transparent_75%,_White_76%,_white_100%)] 
-                        before:top-[0vw] before:-right-[1.5vw] before:mask-shape
-                        after:content-[''] after:absolute after:w-[1.5vw] after:h-[1.5vw] after:z-10 after:bg-[radial-gradient(circle_at_bottom_right,transparent_0%,_transparent_75%,_white_76%,_white_100%)]
-                         after:-bottom-[1.5vw] after:-left-[0vw]
+              className="absolute top-0 left-0 w-[50%] md:w-[38%] lg:w-[28%] aspect-[233/51] rounded-br-[.8rem] md:rounded-br-[1.2rem]  bg-white flex items-center justify-center
+                    before:content-['']  before:absolute before:w-[1rem] before:h-[1rem] md:before:w-[1.5rem] md:before:h-[1.5rem] before:z-10 before:bg-[radial-gradient(circle_at_bottom_right,transparent_0%,_transparent_75%,_white_76%,_white_100%)] 
+                        before:top-[0vw] before:-right-[1rem] md:before:-right-[1.5rem] before:mask-shape
+                        after:content-[''] after:absolute after:w-[1rem] md:after:w-[1.5rem] after:h-[1rem] md:after:h-[1.5rem] after:z-10 after:bg-[radial-gradient(circle_at_bottom_right,transparent_0%,_transparent_75%,_white_76%,_white_100%)]
+                        after:-bottom-[1rem] md:after:-bottom-[1.5rem] after:-left-[0vw]
                     "
             >
               <div className="w-[85%] aspect-[198/28]  flex justify-between ">
-                <div className="w-[14.14%] aspect-[32/28] bg-[#E0E0E0] text-[1.3vw] flex items-center justify-center font-semibold rounded-[.4vw]">
-                  1
+                <div className="w-[14.14%] aspect-[32/28] bg-[#efefef] text-[3.5vw] md:text-[3vw] lg:text-[2vw] xl:text-[1.25vw] flex items-center justify-center font-semibold rounded-[.4vw]">
+                  <FaUser />
                 </div>
-                <div className="w-[83.83%] h-full text-[1.3vw] font-semibold flex items-center justify-center text-[#F2591A]">
+                <div className="w-[83.83%] h-full text-[3.5vw] md:text-[3vw] lg:text-[2vw] xl:text-[1.25vw] font-semibold flex items-center justify-center text-[#F2591A]">
                   LOGIN or SIGNUP
                 </div>
               </div>
@@ -46,16 +57,9 @@ function LoginAndSignup() {
             {isLogin ? <LoginForm /> : <SignupForm />}
           </div>
           {/* Form section End */}
-          <a
-            href="#"
-            className=" w-full h-[5.82%] flex px-[2vw] text-[1.7vw] gap-[1vw] items-center"
-          >
-            <img src={leftarrow} alt="" className="h-full aspect-square" />
-            <p>Continue shopping</p>
-          </a>
         </div>
-        <div className=" sm:w-[33.61%] w-[100%] h-full flex sm:justify-start justify-end sm:mt-0 mt-[3vw] ">
-          <div className="w-full h-[85.62%]  rounded-[2vw] ">
+        <div  className="xl:w-[32%] w-full  flex justify-center xl:justify-end my-[5vw] xl:mt-0">
+          <div className=" w-full  xl:min-h-[30vw] rounded-[2vw] ">
             <LoginSignupToggleCard
               isLogin={isLogin}
               toggleButton={toggleButton}
@@ -63,6 +67,14 @@ function LoginAndSignup() {
           </div>
         </div>
       </div>
+      {/* Main Section end */}
+
+      <a  href="#"
+         className=" w-full  h-[5.82%] flex text-[5vw] md:text-[4vw] lg:text-[3vw] xl:text-[1.5vw]  gap-[1vw] items-center"
+      >
+        <img src={leftarrow} alt="" className="h-[7.5vw] md:h-[5vw] lg:h-[3.5vw] xl:h-[2vw] aspect-square" />
+        <p>Continue shopping</p>
+      </a>
     </div>
   );
 }
