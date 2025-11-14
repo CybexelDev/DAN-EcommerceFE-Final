@@ -5,6 +5,7 @@ import greentick from "../../assets/images/login/greentick.png"
 import React, { useState } from "react";
 import { emailLogin, mobilLogin, verifyEmailLogin, verifyMobilLogin } from "../../API/userApi";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 // import { login } from "../../redux/app/store";
 
 const LoginForm = () => {
@@ -15,7 +16,7 @@ const LoginForm = () => {
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,6 +99,7 @@ const LoginForm = () => {
           },
         });
 
+       navigate('/')
 
       } catch {
         setError("OTP verification failed.");
@@ -116,6 +118,8 @@ const LoginForm = () => {
             userId: response?.user?._id,
           },
         });
+
+        navigate('/')
 
       } catch {
         setError("OTP verification failed.");

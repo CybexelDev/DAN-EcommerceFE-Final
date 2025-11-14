@@ -33,7 +33,9 @@ const ProductList = ({ isOpen, productData, productLengthdata }) => {
 
   return (
     <div className="w-full h-full flex flex-wrap gap-5 justify-start">
-      {product?.slice(0, isOpen ? 9 : 12)?.map((product) => (
+      {product?.length > 0 ?  
+      (
+       product?.slice(0, isOpen ? 9 : 12)?.map((product) => (
         <ProductListCard
           key={product._id}
           click={() => navigate(`/product/${product._id}`)}
@@ -43,7 +45,11 @@ const ProductList = ({ isOpen, productData, productLengthdata }) => {
           price={product.rate}
           isOpen={isOpen} />
 
-      ))}
+      ))
+     ) : ( <div className="text-lg text-gray-600 text-center flex justify-center">No Products Found</div>
+     )}
+
+     
     </div>
   );
 };

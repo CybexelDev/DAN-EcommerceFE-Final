@@ -30,10 +30,12 @@ function AddressCard({
         after:-bottom-[2vw] after:-right-[0vw]"
       >
         <button
-          onClick={isSelected ? onChange : onDelete}
+          // onClick={isSelected ? onChange : onDelete}
+          onClick={onDelete}
           className="w-[83%] aspect-[98/34] rounded-[2vw] bg-[#bdbdbd] font-semibold text-[17px] text-[#000] cursor-pointer flex justify-center items-center hover:text-red-800"
         >
-          {isSelected ? "Change" : "Delete"}
+          {/* {isSelected ? "Change" : "Delete"} */}
+          Delete
         </button>
       </div>
 

@@ -6,11 +6,13 @@ import cartItemImage from "../../assets/images/collections_page/drinkpurple.png"
 import cartItemImage2 from "../../assets/images/collections_page/drinkgreen.png"
 import { getCart, removeCart, updateQuantity } from '../../API/userApi'
 import Footer from '../home/homeitems/Footer'
+import SubNav from '../../components/nav/SubNav'
 
 function CartHome() {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const userId = localStorage.getItem("userId");
+    const [renderKey, setRenderKey] = useState(0);
 
   const fetchCart = async () => {
     const data = await getCart(userId);
@@ -25,6 +27,7 @@ function CartHome() {
     const data = await removeCart(produtId, userId)
     if(data.message === "Item removed from cart successfully"){
       fetchCart();
+      setRenderKey(prev => prev + 1);
     }
     console.log(data, "data after delete >>>>>>");
   }
@@ -40,6 +43,7 @@ function CartHome() {
 
     try {
       const data = await updateQuantity(userId, id, newQty)
+      setRenderKey(prev => prev + 1);
       console.log(data, 'product Qty upadate');
 
     } catch (error) {
@@ -50,6 +54,7 @@ function CartHome() {
   return (
     <>
       <div className='relative w-full aspect-[1440/1024]   px-[2.43%] '>
+      <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
         <Nav />
         <div className="w-full h-[25.55%] pt-[13vw]">
           <div className="w-[18%] aspect-[215/27] mb-[2vw] ">
@@ -117,7 +122,7 @@ function CartHome() {
             </div>
           </div>
           <div className="w-[32.5%]">
-            <PaymentCard userIds={userId} cart={cart} />
+            <PaymentCard key={renderKey} userIds={userId} cart={cart} />
           </div>
         </div>
         {/* Main Section End */}

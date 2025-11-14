@@ -8,11 +8,13 @@ import VideoSection from './homeitems/VideoSection'
 import FeaturesSection from './homeitems/FeaturesSection'
 import BlogSection from './homeitems/BlogSection'
 import Footer from './homeitems/Footer'
+import SubNav from '../../components/nav/SubNav'
 
 function Home() {
   return (
-    <div className='px-[3.8%] pt-[3%]  bg-white w-full h-[100]'>
+    <div className='px-[3.8%] pt-[3%] bg-white w-full h-[100]'>
       <div className="pb-[4%]">
+        <SubNav subMinDiv="w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-15 top-1 z-40" />
         <Hero />
       </div>
       <div className="">

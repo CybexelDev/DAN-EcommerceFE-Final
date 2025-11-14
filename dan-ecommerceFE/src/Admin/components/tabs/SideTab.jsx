@@ -1,5 +1,7 @@
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function SideTab({
   selectedTab,
@@ -8,7 +10,8 @@ export default function SideTab({
   index,
   isShrink,
 }) {
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
 
   const handleLogout = () => {
     Swal.fire({
@@ -28,7 +31,10 @@ export default function SideTab({
           text: "You have logged out",
           icon: "success",
         }).then(() => {
-          dispatch({ type: "ADMIN_LOGOUT" });
+          dispatch({ type: "REMOVE_ADMIN_LOGOUT" });
+          localStorage.removeItem("adminToken");
+          localStorage.removeItem("adminName");
+          navigate('/admin')
         });
       } else {
         setSelectedTab("Dashboard");

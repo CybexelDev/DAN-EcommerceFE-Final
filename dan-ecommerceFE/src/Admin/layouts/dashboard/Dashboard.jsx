@@ -4,14 +4,24 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
 } from "recharts";
+import { getDashboardCount } from "../../Api/adminApi";
 
 export default function DashBoard() {
   const [totalItems, setTotalItems] = useState({
     products: 0,
     categories: 0,
-    enquiries: 0,
+    orders: 0,
     users: 0,
   });
+
+  useEffect(() => {
+    getDashboardCount(setTotalItems).then(() => {
+        console.log("Dashboard data fetched successfully");
+    }).catch((err) => {
+        console.error("Error fetching dashboard data:", err);
+    }
+  )
+  }, []);
 
   // Colors for Pie Chart
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f7f"];
@@ -21,7 +31,7 @@ export default function DashBoard() {
   const chartData = [
     { name: "Products", value: totalItems.products },
     { name: "Categories", value: totalItems.categories },
-    { name: "Enquiries", value: totalItems.enquiries },
+    { name: "Orders", value: totalItems.orders },
     { name: "Users", value: totalItems.users },
   ];
 

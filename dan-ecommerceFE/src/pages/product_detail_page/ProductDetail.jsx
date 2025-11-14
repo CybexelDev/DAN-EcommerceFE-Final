@@ -88,6 +88,7 @@ function ProductDetail() {
         // const userId = "68c7c33bea2c350bb430b20d";
         const data = await addCart(userId, productId, quantity);
         console.log("Cart updated:", data);
+        setQuantity(1); 
         alert("Product added to cart!");
     }
 
@@ -192,7 +193,7 @@ function ProductDetail() {
                         <div className="w-full h-[91.4%] flex flex-col justify-between">
                             <div className="w-full h-[84%]  rounded-[1vw]">
                                 <img src={selectedImage} alt=""
-                                    className='w-full h-full rounded-[1vw]' />
+                                    className='w-full h-full rounded-[1vw] object-cover' />
                             </div>
                             <div className="w-full h-[13.4%]  flex justify-center ">
                                 <div className="w-[54.5%]  flex gap-3.5">
@@ -313,7 +314,7 @@ function ProductDetail() {
                                         {/* <p className='text-[1.2vw] text-black/65'>{products?.discription}</p> */}
                                         <p className={`text-[1.2vw] text-black/65 transition-all duration-300 ${expanded ? "line-clamp-none" : "line-clamp-3"
                                             }`}>
-                                            {products?.discription}
+                                            {products?.description}
                                         </p>
 
                                         <button
@@ -347,7 +348,7 @@ function ProductDetail() {
                             </div> */}
 
 
-                            <div className="w-full flex flex-col justify-between">
+                            <div className="w-full flex flex-col justify-between mt-6">
                                 <div className="w-full h-[12.61%] flex justify-between items-center">
                                     <h5 className='text-[1.2vw] font-semibold'>You may also like</h5>
 

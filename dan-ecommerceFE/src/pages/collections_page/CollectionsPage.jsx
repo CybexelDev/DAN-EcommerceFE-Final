@@ -5,20 +5,25 @@ import listiconcenter from "../../assets/images/collections_page/listiconcenter.
 import searchicon from "../../assets/images/collections_page/searchicon.png"
 import ProductList from './ProductList'
 import CategoryList from './CategoryList'
-import { getCategorybasedProduct, getSearch } from '../../API/userApi'
+import { getCategorybasedProduct, getSearch, getSubCategories } from '../../API/userApi'
 import { useNavigate } from "react-router-dom";
 import Footer from '../home/homeitems/Footer';
+import { useParams } from "react-router-dom";
+import SubNav from '../../components/nav/SubNav'
 
 function CollectionsPage() {
-    const [isCategoryOpen, setIsCategoryOpen] = useState(true)
+    const [isCategoryOpen, setIsCategoryOpen] = useState(true);
     const [products, setProducts] = useState([]);
     const [firstCategoryId, setFirstCategoryId] = useState("");
     const [totalProducts, setTotalProducts] = useState(0);
-    const [selectedCategoryName, setSelectedCategoryName] = useState("")
+    const [selectedCategoryName, setSelectedCategoryName] = useState("");
     const [selectedFilter, setSelectedFilter] = useState("");
+    const [subcategoryId, setSubcategoryId] = useState(null);
 
-    console.log( selectedFilter, "selcted Fileterrrr");
-    
+    const { id } = useParams();
+
+    // console.log(products, "selected sub CategoryNameeeeeeeeee%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5");
+    // console.log( selectedFilter, "selcted Fileterrrr");
     // search
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
@@ -85,6 +90,31 @@ function CollectionsPage() {
     }, [firstCategoryId]);
 
 
+
+    useEffect(() => {
+        if (subcategoryId) {
+            const getSubCategory = async () => {
+                try {
+                    const data = await getSubCategories(subcategoryId);
+                    setProducts(data);
+                    console.log(data, "subcategoryyyy");
+                } catch (error) {
+                    console.error("Error fetching subcategory products:", error);
+                }
+            };
+            getSubCategory(); // ✅ call the function here
+        }
+
+    }, [subcategoryId]);
+
+
+    if (id) {
+        useEffect(() => {
+            setFirstCategoryId(id);
+        }, [id])
+    }
+
+
     // callback function to receive from child
     const handleCategoryId = (id, selectedCategoryName) => {
         setFirstCategoryId(id);
@@ -92,10 +122,17 @@ function CollectionsPage() {
         console.log("Received from child:", id, selectedCategoryName);
     };
 
+
+    const handleSubcategory = (subcategoryId) => {
+        setSubcategoryId(subcategoryId);
+    }
+
+
     // end of selected option
     const sortOptions = ["Popularity", "Newest", "Best Rated", "Price: High to Low", "Price: Low to High"];
     return (
         <>
+          <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
             <div className='relative w-full aspect-[1440/1663]   pt-[10.9%] mb-[3vw]  '>
                 <Nav />
                 <div className="w-[100%] h-[100%]  flex flex-col justify-between ">
@@ -217,7 +254,7 @@ function CollectionsPage() {
                                     {/* List category */}
                                     <div className="w-full h-[2.9%] "></div>
                                     <div className="w-full h-[97.1%] bg-[#f4f4f4] rounded-[1.5vw]">
-                                        <CategoryList onFirstCategorySelect={handleCategoryId} isCategoryOpen={isCategoryOpen} />
+                                        <CategoryList sndSubcategoryId={handleSubcategory} onFirstCategorySelect={handleCategoryId} id={id} isCategoryOpen={isCategoryOpen} />
                                     </div>
 
                                     {/* List category end */}

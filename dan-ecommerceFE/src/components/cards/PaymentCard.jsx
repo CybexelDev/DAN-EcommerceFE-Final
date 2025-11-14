@@ -12,8 +12,12 @@ function PaymentCard({ userIds, cart }) {
     const [voucherDiscount, setVoucherDiscount] = useState('');
     const [code, setCode] = useState('');
     const [productCart, setProductCart] = useState([]);
+    const address = useSelector((state) => state.deliveryAddress);
 
-    console.log(productCart, "code data >>>>>>>00000000000000000000");
+    console.log(address, "redux adresssssssssssssssssssssss");
+    
+
+    // console.log(productCart, "code data >>>>>>>00000000000000000000");
 
 
     // console.log(Summary, "summary data >>>>>>>00000000000000000000");
@@ -22,7 +26,7 @@ function PaymentCard({ userIds, cart }) {
     useEffect(() => {
         const fetchTotal = async () => {
             const data = await getSummery(userId);
-            console.log(data, "total ammount data >>>>>>> uuuuuuuuuuuuuuuuuu");
+            // console.log(data, "total ammount data >>>>>>> uuuuuuuuuuuuuuuuuu");
             
             setTotelAmmount(data.totalDiscountedPrice);
             setDiscountRate(data.totalSavings)
@@ -36,7 +40,7 @@ function PaymentCard({ userIds, cart }) {
     const fetchVoucher = async () => {
         try {
             if (!code) {
-                console.log("Please enter a voucher code");
+                // console.log("Please enter a voucher code");
                 return;
             }
             const data = await applayVoucher(code, tottelAmmount);
@@ -58,6 +62,12 @@ function PaymentCard({ userIds, cart }) {
 
   const makePayment = async () => {
     try {
+        
+        if(address._id === null || address._id === undefined){
+            alert("Please select a delivery address before proceeding to payment.");
+            return;
+        }
+
       const stripe = await stripePromise;
 
       const body = { products: productCart };

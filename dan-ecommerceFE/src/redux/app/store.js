@@ -100,7 +100,7 @@ function deliveryHereAddress(state = initialDeliverHereState, action) {
         ...state,
         addressType: null,
         area: null,
-        city: null,   
+        city: null,
         fullName: null,
         houseNo: null,
         landmark: null,
@@ -114,6 +114,40 @@ function deliveryHereAddress(state = initialDeliverHereState, action) {
   }
 }
 
+const initialAdminLogin = {
+  id: null,
+  adminName: null,
+  role: null,
+  adminToken: null,
+  isAdminLoggedIn: false,
+};
+
+
+function adminLogin(state = initialAdminLogin, action) {
+  switch (action.type) {
+    case "SET_ADMIN_LOGIN":
+      return {
+        ...state,
+        id: action.payload._id,
+        adminName: action.payload.username,
+        role: action.payload.role,
+        adminToken: action.payload.adminToken,
+        isAdminLoggedIn: true,
+      };
+    case "REMOVE_ADMIN_LOGOUT":
+      return {
+        ...state,
+        id: null,
+        adminName: null,
+        role: null,
+        adminToken: null,
+        isAdminLoggedIn: false,
+      };
+    default:
+      return state;
+  }
+}
+
 
 
 // ⬇️ If you have more reducers, you can add them here
@@ -121,7 +155,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
   addressStatus: addressReducer,
-  deliveryAddress:deliveryHereAddress,
+  deliveryAddress: deliveryHereAddress,
+  adminLogin: adminLogin,
 });
 
 

@@ -3,11 +3,13 @@ import CollectionHomeCard from '../../../components/cards/CollectionHomeCard'
 import categoryfood from "../../../assets/images/collection/categoryfood.png"
 import categorybab from "../../../assets/images/collection/categorybarb.png"
 import { getCategorys } from '../.././../API/userApi'
+import { useNavigate } from "react-router-dom";
 
 function Collections() {
 
     const [data, setdata] = useState([])
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         getCategorys(setdata);
@@ -28,8 +30,9 @@ function Collections() {
                 </div>
                 <div className=" h-[77%] flex justify-between">
                     {data.map((item) => (
-                        <div className="w-[31.5%] aspect-[448/318] ">
+                        <div key={item._id} className="w-[31.5%] aspect-[448/318] ">
                             <CollectionHomeCard
+                                click={() => navigate(`/collections/${item._id}`)}
                                 image={item.image[0]}
                                 category={item.category} />
                         </div>

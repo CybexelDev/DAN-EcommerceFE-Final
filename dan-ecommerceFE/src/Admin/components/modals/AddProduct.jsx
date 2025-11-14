@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { addNewProduct, getCategories } from '../../Api/adminApi';
 
 const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
+    
     const [formData, setFormData] = useState({
         brandName: '',
         productName: '',
@@ -16,6 +17,9 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
         categoryId: '',
         subCategoryId: '', 
     });
+
+    console.log(formData, "#########################3");
+    
 
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
@@ -117,6 +121,8 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
     };
 
     const handleInputChange = (e) => {
+        console.log(e.target, "##############################################3");
+        
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,

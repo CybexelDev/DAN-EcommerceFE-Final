@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Nav from '../../components/nav/Nav'
 import Footer from '../home/homeitems/Footer'
 import { getBlogs } from '../../API/userApi';
+import SubNav from '../../components/nav/SubNav';
 
 
 const blogs = [
@@ -62,8 +63,8 @@ const BlogPage = () => {
     }, []);
     return (
         <div>
+            <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`}/>
             <Nav />
-
             <div className="min-h-screen bg-white text-black flex flex-col items-center py-10 px-4 md:px-10 mt-[100px]">
                 {/* Page Header */}
                 <div className="text-center mb-10">

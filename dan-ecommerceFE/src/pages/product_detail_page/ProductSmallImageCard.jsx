@@ -15,7 +15,7 @@ function ProductSmallImageCard({image, isSelected, onClick}) {
                         <CgArrowTopRight className='h-[50%] aspect-square ' />
                       </div>
                     </div>
-        <img src={image} alt="" className='w-full h-full object-fit' />
+        <img src={image} alt="" className='w-full h-full object-contain' />
     </div>
   )
 }

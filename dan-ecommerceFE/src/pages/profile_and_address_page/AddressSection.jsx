@@ -14,8 +14,8 @@ function AddressSection() {
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const dispatch = useDispatch();
   const { addressAddStatus } = useSelector((state) => state.addressStatus);
-
   const deliveryAddress = useSelector((state) => state.deliveryAddress);
+  
 
   console.log(deliveryAddress, "delivery address in address section >>>>>>>>> 555555");
   
@@ -46,6 +46,7 @@ function AddressSection() {
   const handleDelete = async (addressId) => {
     if (!window.confirm("Are you sure you want to delete this address?")) return;
     try {
+      dispatch({ type: "REMOVE_DELIVERY_ADDRESS" });
       const data = await deleteAddress(userId, addressId);
       setAddresses(data.addresses);
     } catch (error) {
