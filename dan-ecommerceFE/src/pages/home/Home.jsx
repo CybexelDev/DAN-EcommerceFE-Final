@@ -24,19 +24,19 @@ function Home() {
       <div className="md:pb-[4%] pb-[7%] ">
         <Testimonal />
       </div>
-      <div className="md:pb-[4%] pb-[7%] ">
+      <div className="md:pb-[2%] pb-[7%] ">
         <Collections />
       </div>
       <div className="md:pb-[4%] pb-[10%]">
         <VideoSection />
       </div>
-      <div className="pb-[10%] md:pb-[5%]">
+      <div className="pb-[10%] md:pb-[0%]">
         <FeaturesSection />
       </div>
-      <div className="pb-[15%] md:pb-[5%]">
+      <div className="pb-[5%] md:pb-[0%]">
         <BlogSection />
       </div>
-      <div className="md:pb-[0%] pb-[17%]">
+      <div className="md:pb-[2%] pb-[17%]">
         <Footer/>
       </div>
     

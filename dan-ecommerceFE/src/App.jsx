@@ -15,6 +15,7 @@ import BlogPage from './pages/blogPage/blogPage';
 import SupportPage from './pages/SupportPage/SupportPage';
 import CheckoutSuccess from './components/paymentStatus/CheckoutSuccess';
 import OrdersPage from './pages/orders/Orders';
+import { useState } from 'react';
 
 
 function App() {
@@ -31,11 +32,7 @@ function App() {
     <Router>
       <Routes>
 
-        
         {adminToken? <Route path="/admin/dashboard" element={<Admin />} />  :  <Route path="/admin" element={<AdminLogin />} />}
-            
-            
-
 
             {/* <Route path="*" element={<Home />} /> */}
 

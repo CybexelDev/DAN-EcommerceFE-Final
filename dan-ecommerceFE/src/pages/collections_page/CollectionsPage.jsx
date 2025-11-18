@@ -6,8 +6,8 @@ import listiconcenter from "../../assets/images/collections_page/listiconcenter.
 import searchicon from "../../assets/images/collections_page/searchicon.png"
 import ProductList from './ProductList'
 import CategoryList from './CategoryList'
-import { getCategorybasedProduct, getSearch, getCategorys } from '../../API/userApi'
-import { getCategorybasedProduct, getSearch, getSubCategories } from '../../API/userApi'
+import { getCategorybasedProduct, getSearch, getCategorys, getSubCategories } from '../../API/userApi'
+// import { getCategorybasedProduct, getSearch,  } from '../../API/userApi'
 import { useNavigate } from "react-router-dom";
 import Footer from '../home/homeitems/Footer';
 import { useParams } from "react-router-dom";
@@ -58,6 +58,7 @@ function CollectionsPage() {
     const [isSortOpen, setIsSortOpen] = useState(false)
     const [isSelected, setIsSelected] = useState("Popularity")
     const dropDownRef = useRef(null)
+
 useEffect(() => {
   const fetchInitialData = async () => {
     try {
@@ -65,7 +66,7 @@ useEffect(() => {
         if (data && data.length > 0) {
           const first = data[0];
           setFirstCategoryId(first._id);
-          setSelectedCategoryName(first.name);
+          setSelectedCategoryName(first.category);
 
           const products = await getCategorybasedProduct(first._id);
           setProducts(products);
@@ -356,7 +357,7 @@ useEffect(() => {
                                     {/* List category */}
                                     <div className="w-full h-[2.5%] md:h-[5.9%]  "> <h5 className='text-[#6C090E] text-[4vw] md:text-[2.3vw] text-center font-semibold'>Categories</h5></div>
                                     <div className="w-full h-[97.1%]  rounded-[1.5vw] py-[5%] bg-[#f4f4f4]">
-                                        <CategoryList onFirstCategorySelect={handleCategoryId} isCategoryOpen={isCategoryOpen} />
+                                        <CategoryList sndSubcategoryId={handleSubcategory} onFirstCategorySelect={handleCategoryId} isCategoryOpen={isCategoryOpen} />
 
                                     </div>
 

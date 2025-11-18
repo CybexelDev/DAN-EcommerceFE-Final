@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import toprightarrow from "../../../assets/images/components/toprightarrowcircle.png"
 import BlogListCard from '../../../components/cards/BlogListCard'
-import { getBlogs } from '../../../API/userApi'
+import { getBlogs } from '../../../API/userApi';
+import { useNavigate } from 'react-router-dom';
 
 function BlogSection() {
     const [blogs, setBlogs] = useState([]);
     const [selectedBlog, setSelectedBlog] = useState(null);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchBlogs = async () => {
@@ -29,7 +31,7 @@ function BlogSection() {
                     <h3 className='text-[clamp(1.7rem,2.3vw,2.5rem)] lg:text-[clamp(1.3rem,1.5vw,1.7rem)] font-semibold mb-[.5vw]'>Explore the blog</h3>
                     <p className='text-[clamp(1.1rem,1.5vw,1.9rem)] lg:text-[clamp(.9rem,1.07vw,1.3rem)] text-gray-700'>Share insights, boost SEO, and build trust with your audience.</p>
                 </div>
-                <div className="w-full lg:w-1/2 text-[clamp(1.3rem,1.5vw,1.9rem)] lg:text-[clamp(1.1rem,1.3vw,1.5rem)] md:text-gray-700 text-black hover:text-gray-900 font-medium cursor-pointer flex items-center justify-end px- mt-3 lg:mt-0">
+                <div onClick={ ()=> navigate('/blog')} className="w-full lg:w-1/2 text-[clamp(1.3rem,1.5vw,1.9rem)] lg:text-[clamp(1.1rem,1.3vw,1.5rem)] md:text-gray-700 text-black hover:text-gray-900 font-medium cursor-pointer flex items-center justify-end px- mt-3 lg:mt-0">
                     <a href="#">View Posts &rarr;</a>
                 </div>
             </div>

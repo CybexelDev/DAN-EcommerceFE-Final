@@ -49,7 +49,7 @@ function CategoryList({ onFirstCategorySelect, id, sndSubcategoryId }) {
       }
 
     }
-  }, [categories]);
+  }, [category]);
 
   const handleCategoryClick = (id, category) => {
     setOpenSubCategory((prev) => (prev === id ? null : id));
@@ -75,7 +75,7 @@ function CategoryList({ onFirstCategorySelect, id, sndSubcategoryId }) {
   return (
     <div className="w-full h-full px-[6.7%] pt-[2.5%] overflow-y-auto">
       <div className="w-full h-full flex flex-col gap-[1.5vw]">
-        {categories.map((item) => (
+        {category.map((item) => (
           <div
             key={item._id}
             onClick={() => handleCategoryClick(item._id, item.category)}
