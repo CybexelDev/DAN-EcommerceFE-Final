@@ -64,7 +64,7 @@ const BlogPage = () => {
     }, []);
     return (
         <div>
-            <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
+            <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-[4%] top-1 z-40`} />
             <div className="hidden lg:block">
                 <Nav />
             </div>

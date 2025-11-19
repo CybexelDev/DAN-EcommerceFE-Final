@@ -33,7 +33,7 @@ const SupportPage = () => {
                     <MobileNav />
                 </div>
 
-        <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
+        <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-[4%] top-1 z-40`} />
 
             <div className="min-h-screen bg-gradient-to-b from-white via-orange-50/40 to-white flex flex-col items-center pt-20 px-6 sm:px-10 mt-[100px]">
                 {/* Hero Section */}

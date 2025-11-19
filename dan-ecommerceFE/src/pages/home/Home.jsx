@@ -12,9 +12,9 @@ import SubNav from '../../components/nav/SubNav'
 
 function Home() {
   return (
-    <div className='px-[3.8%] pt-[3%]  bg-white w-full h-[100]'>
+    <div className='px-[3.8%] pt-[11%] md:pt-[5%] xl:pt-[3%]  bg-white w-full h-[100]'>
       <div className="md:pb-[4%] pb-[7%] ">
-      <SubNav subMinDiv="w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-15 top-1 z-40" />
+      <SubNav subMinDiv="w-[100%] h-[35px]  flex gap-4 items-center justify-end pr-2 absolute right-[4%] top-1 z-40" />
 
         <Hero />
       </div>

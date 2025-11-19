@@ -199,14 +199,14 @@ useEffect(() => {
     return (
 
         <div className='mx-[0%] '>
-            <div className='relative  w-full  pt-[5%]  lg:pt-[10.9%] mb-[3vw]  '>
+            <div className='relative  w-full  pt-[10%]  lg:pt-[10.9%] mb-[3vw]  '>
                 <div className="hidden lg:block">
                     <Nav />
                 </div>
                 <div className="block lg:hidden ">
                     <MobileNav />
                 </div>
-           <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
+           <SubNav subMinDiv={`w-[100%] h-[35px]  flex gap-4 items-center justify-end pr-2 absolute right-[3.5%] top-1 z-40`} />
                 <div className="w-full h-full px-[3%]  ">
 
                     {/* Top bar Section  */}

@@ -5,10 +5,11 @@ import ProfileSection from './ProfileSection';
 import AddressSection from './AddressSection';
 import MobileNav from '../../components/nav/MobileNav';
 import Footer from '../home/homeitems/Footer.jsx'
+import SubNav from '../../components/nav/SubNav.jsx';
 
 function ProfileAndAddress() {
   return (
-    <div className='w-full min-h-[80vh] bg-[#f2f2f2]  relative pt-[5%] md:pt-[5%] lg:pt-[10.22%] px-[3.12%]  pb-[2vw] mb-[9vw] md:mb-[2vw] '>
+    <div className=' w-full min-h-[80vh] bg-[#f2f2f2]  relative pt-[10%] md:pt-[5%] lg:pt-[10.22%] px-[3.12%]  pb-[2vw] mb-[9vw] md:mb-[2vw] '>
       {/* Nav Section */}
       <div className="hidden lg:block">
         <Nav />
@@ -16,6 +17,7 @@ function ProfileAndAddress() {
       <div className="block lg:hidden">
         <MobileNav />
       </div>
+      <SubNav subMinDiv={`w-[100%]  h-[35px]  flex gap-4 items-center justify-end pr-2 absolute right-[3.12%] top-1 z-40`} />
 
       {/* Main Content */}
       <div className="w-full  flex flex-col lg:flex-row justify-between gap-[2vw] mb-[2vw]">
