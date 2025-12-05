@@ -15,6 +15,8 @@ import MobileNav from '../../components/nav/MobileNav';
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import SubNav from '../../components/nav/SubNav';
 import aedicon from "../../assets/images/main/aedicon.png"
+import { useSelector } from "react-redux";
+
 
 
 
@@ -30,6 +32,7 @@ function ProductDetail() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [expanded, setExpanded] = useState(false);
 
+    const address = useSelector((state) => state.deliveryAddress);
     const userId = localStorage.getItem("userId");
 
     // console.log(categoryId, "categoryValue iddddd>>>>>>>>>>>>>>");
@@ -128,6 +131,12 @@ function ProductDetail() {
         console.log(products, "productsssssssssssssssss $$$$$$$$$$$$$$$");
         
         try {
+
+           if(address._id === null || address._id === undefined){
+            alert("Please select a delivery address before proceeding to payment.");
+            return;
+        }
+
             const stripe = await stripePromise;
 
             const productData = {
@@ -288,7 +297,7 @@ function ProductDetail() {
 
                                                     {/* Rating Text */}
                                                     <p className="text-[1rem] md:text-[1.5rem] text-black/50 font-medium">
-                                                    ({(products.starRating ?? 0).toFixed(1)}/5 • 120 reviews)
+                                                    ({(products.starRating ?? 0).toFixed(1)}/5)
                                                   </p>
 
                                                 </div>

@@ -20,52 +20,151 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const isEmail = (input) => /\S+@\S+\.\S+/.test(input);
-  const isMobile = (input) => /^[0-9]{6,15}$/.test(input);
+  const isMobile = (input) => /^\+?[0-9]{10,15}$/.test(input);
+
 
   const navigate = useNavigate();
 
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     if (isEmail(value)) {
+  //       await emailLogin(value);
+  //       setStep(2);
+  //     } else if (isMobile(value)) {
+  //       await mobilLogin(value);
+  //       setStep(2);
+  //     } else {
+  //       setError("Please enter a valid email or mobile number.");
+  //     }
+  //   } catch {
+  //     setError("Error sending OTP. Try again.");
+  //   }
+  // };
+
+  // const handleOtpSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (otp.length !== 6) return setError("OTP must be 6 digits");
+
+  //   try {
+  //     const response = isEmail(value)
+  //       ? await verifyEmailLogin(value, otp)
+  //       : await verifyMobilLogin(value, otp);
+
+  //     dispatch({
+  //       type: "SET_USER",
+  //       payload: {
+  //         username: isEmail(value)
+  //           ? response?.user?.email
+  //           : response?.user?.phone,
+  //         accessToken: response?.token,
+  //         userId: response?.user?._id || response?.user?.id,
+  //       },
+  //     });
+  //     navigate("/");
+  //   } catch {
+  //     setError("OTP verification failed.");
+  //   }
+  // };
+
+    const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      if (isEmail(value)) {
-        await emailLogin(value);
+
+    // Check email or phone
+    if (isEmail(value)) {
+      try {
+        // Example API call for email
+
+        const response = await emailLogin(value);
+        console.log(response, "email login response >>>>>>");
         setStep(2);
-      } else if (isMobile(value)) {
-        await mobilLogin(value);
-        setStep(2);
-      } else {
-        setError("Please enter a valid email or mobile number.");
+        setError("")
+      } catch {
+        setError("Error sending email OTP.");
       }
-    } catch {
-      setError("Error sending OTP. Try again.");
+    } else if (isMobile(value)) {
+      try {
+        // Example API call for mobile
+        const response = await mobilLogin(value);
+        console.log(response, "mobile login response >>>>>>");
+        setStep(2);
+        setError("")
+      } catch {
+        setError("Error sending mobile OTP.");
+      }
+    } else {
+      setError("Please enter a valid email or mobile number.");
     }
   };
+
+  const handleChange = (e) => {
+    const input = e.target.value;
+
+    if (/^\d*$/.test(input)) {
+      setOtp(input)
+
+      if (input.length > 6) {
+        setError("OTP cannot be more than 6 digits");
+      } else {
+        setError("")
+      }
+    } else {
+      setError("OTP must contain only numbers");
+    }
+  };
+
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
-    if (otp.length !== 6) return setError("OTP must be 6 digits");
 
-    try {
-      const response = isEmail(value)
-        ? await verifyEmailLogin(value, otp)
-        : await verifyMobilLogin(value, otp);
-
-      dispatch({
-        type: "SET_USER",
-        payload: {
-          username: isEmail(value)
-            ? response?.user?.email
-            : response?.user?.phone,
-          accessToken: response?.token,
-          userId: response?.user?._id || response?.user?.id,
-        },
-      });
-    } catch {
-      setError("OTP verification failed.");
+    if (otp.length !== 6) {
+      setError("Otp must be 6 digits")
     }
-  };
 
+    if (isEmail(value)) {
+      try {
+        const response = await verifyEmailLogin(value, otp);
+
+        console.log(response, "email otp verify response >>>>>>");
+
+        dispatch({
+          type: "SET_USER",
+          payload: {
+            username: response?.user?.email,
+            accessToken: response?.token,
+            userId: response?.user?._id,
+          },
+        });
+
+       navigate('/')
+
+      } catch {
+        setError("OTP verification failed.");
+      }
+    } else if (isMobile(value)) {
+      try {
+        const response = await verifyMobilLogin(value, otp);
+
+        console.log(response, "mobile number otp verify response >>>>>>");
+
+          dispatch({
+          type: "SET_USER",
+          payload: {
+            username: response?.user?.phone,
+            accessToken: response?.token,
+            userId: response?.user?._id,
+          },
+        });
+
+        navigate('/')
+
+      } catch {
+        setError("OTP verification failed.");
+      }
+    }
+
+  }
 
   return (
   <div className="flex flex-col lg:flex-row justify-between items-stretch gap-[2vw]   ">
