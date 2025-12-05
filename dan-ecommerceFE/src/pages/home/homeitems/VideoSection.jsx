@@ -1,9 +1,9 @@
 import React, { useRef, useState} from 'react'
-import pause from "../../../assets/images/videosection/Pause.png"
+import pause from "../../../assets/images/videosection/pause.png"
 import play from "../../../assets/images/videosection/play.png"
-import topicon from "../../../assets/images/components/toprightarrowcircle.png"
-import vid from "../../../assets/videos/video5.mp4"
-
+// import topicon from "../../../assets/images/components/toprightarrowcircle.png"
+// import vid from "../../../assets/videos/video5.mp4"
+import vid from "../../../assets/videos/del.mp4"
 function VideoSection() {
   const videoRef = useRef(null)
   const [isplaying, setIsPlaying] = useState(true)
@@ -20,10 +20,10 @@ function VideoSection() {
     setIsPlaying(!isplaying);
   };
   return (
-    <div className='w-full aspect-[1440/515] bg-amber-300 relative rounded-[1.5vw] mb-[2vw]'>
+    <div className='w-full aspect-[1440/515] bg-amber-300 relative rounded-[1.5vw] mt-[2%]'>
         <video 
           ref={videoRef}
-          className='w-full aspect-[1440/515] object-cover object-center overflow-hidden rounded-[1.5vw] '
+          className='w-full aspect-[1440/650] md:aspect-[1440/550] lg:aspect-[1440/515] object-cover object-center overflow-hidden rounded-[1.5vw] '
           src={vid}
           autoPlay
           muted

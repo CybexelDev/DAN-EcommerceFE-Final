@@ -1,12 +1,11 @@
 import axios from 'axios';
-// import api from './axiosInstence';
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+import api from '../axios/axiosinstence';
+// import api from './apiInstence';
 
 
 export const getCategorys = async (fetchcategorydata) => {
   try {
-    const response = await axios.get(`${BASE_URL}users/getcategory`);
+    const response = await api.get(`users/getcategory`);
     fetchcategorydata(response.data);
   } catch (error) {
     console.error("Error fetching categorys:", error);
@@ -17,7 +16,7 @@ export const getCategorys = async (fetchcategorydata) => {
 
 export const getpopulearProducts = async (fetchProductdata) => {
   try {
-    const response = await axios.get(`${BASE_URL}users/getPopular`);
+    const response = await api.get(`users/getPopular`);
     fetchProductdata(response.data.data);
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -28,7 +27,7 @@ export const getpopulearProducts = async (fetchProductdata) => {
 
 // export const getProducts = async (fetchProductdata) => {
 //     try {
-//         const response = await axios.get(`${BASE_URL}users/getProduct`);
+//         const response = await api.get(`users/getProduct`);
 //         fetchProductdata(response.data);
 //     } catch (error) {
 //         console.error("Error fetching products:", error);
@@ -38,7 +37,7 @@ export const getpopulearProducts = async (fetchProductdata) => {
 
 export const getcategory = async (fetchProductdata) => {
   try {
-    const response = await axios.get(`${BASE_URL}users/getCategory`);
+    const response = await api.get(`users/getCategory`);
     fetchProductdata(response.data);
   } catch (error) {
     console.error("Error fetching category:", error);
@@ -50,7 +49,7 @@ export const getCategorybasedProduct = async (id) => {
   try {
     // console.log(id, "idddddddddddddddddddddd");
 
-    const response = await axios.get(`${BASE_URL}users/getCategoryProduct`, { params: { id: id } });
+    const response = await api.get(`users/getCategoryProduct`, { params: { id: id } });
 
     return response.data;
   } catch (error) {
@@ -62,7 +61,7 @@ export const getCategorybasedProduct = async (id) => {
 
 export const getSingleProduct = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}users/getSingleProduct`, {
+    const response = await api.get(`users/getSingleProduct`, {
       params: { productId: id },
     });
     return response.data;
@@ -75,7 +74,7 @@ export const getSingleProduct = async (id) => {
 
 export const getRelatedProduct = async (categoryId) => {
   try {
-    const response = await axios.get(`${BASE_URL}users/getRelatedProduct`, {
+    const response = await api.get(`users/getRelatedProduct`, {
       params: { id: categoryId },
     });
     console.log(response.data, "related product data>>>>>>>>>>>>");
@@ -91,7 +90,7 @@ export const getRelatedProduct = async (categoryId) => {
 
 export const getCart = async (userId) => {
   try {
-    const response = await axios.get(`${BASE_URL}users/getCart`, {
+    const response = await api.get(`users/getCart`, {
       params: { userId: userId },
     });
 
@@ -106,7 +105,7 @@ export const getCart = async (userId) => {
 
 export const addCart = async (userId, productId, quantity) => {
   try {
-    const response = await axios.post(`${BASE_URL}users/addCart`, {
+    const response = await api.post(`users/addCart`, {
       userId,
       productId,
       quantity
@@ -122,7 +121,7 @@ export const addCart = async (userId, productId, quantity) => {
 
 export const getHeader = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}users/header`);
+    const response = await api.get(`users/header`);
     return response.data; // { message, data }
   } catch (error) {
     console.error("Error fetching header:", error);
@@ -133,7 +132,7 @@ export const getHeader = async () => {
 
 export const getBlogs = async () => {
   try {
-    const res = await axios.get(`${BASE_URL}users/getBlogs`);
+    const res = await api.get(`users/getBlogs`);
     return res.data; // returns { message, data }
 
   } catch (error) {
@@ -145,7 +144,7 @@ export const getBlogs = async () => {
 
 export const mobilLogin = async (mobile) => {
   try {
-    const res = await axios.post(`${BASE_URL}auth/send-otp`, { phone: mobile });
+    const res = await api.post(`auth/send-otp`, { phone: mobile });
     return res.data; // returns { message, data }
 
   } catch (error) {
@@ -156,7 +155,7 @@ export const mobilLogin = async (mobile) => {
 
 export const verifyMobilLogin = async (mobile, otp) => {
   try {
-    const res = await axios.post(`${BASE_URL}auth/verify-otp`, { phone: mobile, otp: otp });
+    const res = await api.post(`auth/verify-otp`, { phone: mobile, otp: otp });
     console.log(res.data, "number login response");
 
     if (res.data.message && res.data.token) {
@@ -177,7 +176,7 @@ export const verifyMobilLogin = async (mobile, otp) => {
 
 export const emailLogin = async (email) => {
   try {
-    const res = await axios.post(`${BASE_URL}auth/sendEmailOtp`, { email: email });
+    const res = await api.post(`auth/sendEmailOtp`, { email: email });
 
   } catch (error) {
     console.error("Error in email login:", error);
@@ -188,14 +187,14 @@ export const emailLogin = async (email) => {
 
 export const verifyEmailLogin = async (email, otp) => {
   try {
-    const res = await axios.post(`${BASE_URL}auth/verifyEmailOtp`, { email: email, otp: otp });
+    const res = await api.post(`auth/verifyEmailOtp`, { email: email, otp: otp });
 
     console.log(res.data, "email login response >>>>>>777777");
 
     if (res.data.message && res.data.token) {
       localStorage.setItem('accessToken', res.data.token);
       localStorage.setItem('userName', res.data.user.email);
-      localStorage.setItem('userId', res.data.user.id);
+      localStorage.setItem('userId', res.data.user._id);
       return res.data;
 
     } else {
@@ -212,7 +211,7 @@ export const verifyEmailLogin = async (email, otp) => {
 
 export const getTestimaonial = async (fetchTestimaonial) => {
   try {
-    const res = await axios.get(`${BASE_URL}users/getTestimonials`);
+    const res = await api.get(`users/getTestimonials`);
     fetchTestimaonial(res.data.data);
   } catch (error) {
     res.status(500).json(error)
@@ -223,7 +222,7 @@ export const getTestimaonial = async (fetchTestimaonial) => {
 
 export const getBrand = async (fetchBrand) => {
   try {
-    const res = await axios.get(`${BASE_URL}users/getBrand`);
+    const res = await api.get(`users/getBrand`);
     fetchBrand(res.data.data);
   } catch (error) {
     res.status(500).json(error)
@@ -236,7 +235,7 @@ export const removeCart = async (productId, userId) => {
   console.log(userId, productId, "remove cart api >>>>>>>");
 
   try {
-    const res = await axios.delete(`${BASE_URL}users/removeCart`, {
+    const res = await api.delete(`users/removeCart`, {
       data: { productId, userId },
     });
 
@@ -250,7 +249,7 @@ export const removeCart = async (productId, userId) => {
 
 export const getSearch = async (query) => {
   try {
-    const res = await axios.get(`${BASE_URL}users/search`, {
+    const res = await api.get(`users/search`, {
       params: { query },
     });
     console.log(res.data?.results, "search data >>>>>>>");
@@ -264,9 +263,9 @@ export const getSearch = async (query) => {
 
 export const getSummery = async (userId) => {
   try {
-    const response = await axios.get(`${BASE_URL}users/summary/${userId}`);
+    const res = await api.get(`users/summary/${userId}`);
 
-    return response?.data
+    return res.data
   } catch (error) {
     res.status(500).json(error)
   }
@@ -275,7 +274,7 @@ export const getSummery = async (userId) => {
 
 export const applayVoucher = async (code, tottelAmmount) => {
   try {
-    const response = await axios.post(`${BASE_URL}users/applyVoucher`, {
+    const response = await api.post(`users/applyVoucher`, {
       code: code,
       cartTotal: tottelAmmount
     });
@@ -292,7 +291,7 @@ export const applayVoucher = async (code, tottelAmmount) => {
 
 export const updateQuantity = async (userId, id, newQty) => {
   try {
-    const response = await axios.put(`${BASE_URL}users/cartUpdateQty`, {
+    const response = await api.put(`users/cartUpdateQty`, {
       userId: userId,
       productId: id,
       quantity: newQty
@@ -309,7 +308,7 @@ export const updateQuantity = async (userId, id, newQty) => {
 
 export const addAddress = async (userId, formData) => {
   try {
-    const response = await axios.post(`${BASE_URL}users/addAddress`, {
+    const response = await api.post(`users/addAddress`, {
       userId,
       address: formData,
     });
@@ -323,7 +322,7 @@ export const addAddress = async (userId, formData) => {
 
 export const getAddress = async (userId) => {
   try {
-    const res = await axios.get(`${BASE_URL}users/getAddresses`, {
+    const res = await api.get(`users/getAddresses`, {
       params: { userId }, // ✅ sends ?userId=68b2927106e5c87d02b7d48a
     });
     console.log("User addresses:", res.data);
@@ -335,7 +334,7 @@ export const getAddress = async (userId) => {
 
 
 export const deleteAddress = async (userId, addressId) => {
-  const response = await axios.post(`${BASE_URL}users/deleteAddress`, {
+  const response = await api.post(`users/deleteAddress`, {
     userId,
     addressId,
   });
@@ -343,10 +342,11 @@ export const deleteAddress = async (userId, addressId) => {
 };
 
 
-export const checkoutSession = async (body) => {
 
+
+export const checkoutSession = async (body) => {
   try {
-    const response = await axios.post(`${BASE_URL}users/create-checkout-session`,
+    const response = await api.post(`users/create-checkout-session`,
       body,
       {
         headers: {
@@ -354,7 +354,6 @@ export const checkoutSession = async (body) => {
         },
       }
     );
-
     console.log(response.data);
     return response;
   } catch (error) {
@@ -366,7 +365,7 @@ export const checkoutSession = async (body) => {
 
 export const getOrders = async (userId) => {
   try {
-    const res = await axios.get(`${BASE_URL}users/getUserOrder/${userId}`);
+    const res = await api.get(`users/getUserOrder/${userId}`);
     return res.data;
   }
   catch (error) {
@@ -376,13 +375,79 @@ export const getOrders = async (userId) => {
 
 
 export const getCategoryPopularProduct = async (categoryId) => {
+
   try {
-    const response = await axios.get(`${BASE_URL}users/getCategoryPopularProduct`, {
-      categoryId,
+    const response = await api.get(`users/getCategoryPopularProduct`, {
+      params: { categoryId }, // <--- send as query param
     });
     return response.data;
   } catch (error) {
-    logger.error("Error fetching category popular product:", error);
-    console.log(error);
+    console.error("Error fetching category popular product:", error);
+  }
+};
+
+
+
+export const getSubCategories = async (subCategoryId) => {
+  try {
+    const res = await api.get(`users/getSubcategory/${subCategoryId}`);
+
+    return res.data;
+  }
+  catch (error) {
+    res.status(500).json(error)
+  }
+};
+
+
+export const saveOredr = async (sessionId, userId, address) => {
+  try {
+    const res = await api.post(`users/PaymentSuccess`, {
+      sessionId,
+      userId,
+      address,
+    });
+    return res.data;
+  }
+  catch (error) {
+    res.status(500).json(error)
+  }
+};
+
+
+export const getCategorylatestProduct = async (categoryId) => {
+
+  try {
+    const response = await api.get(`users/getCategorylatestProduct`, {
+      params: { categoryId }, // <--- send as query param
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching category popular product:", error);
+  }
+};
+
+export const getCategoryHighToLowRateProduct = async (categoryId) => {
+
+  try {
+    const response = await api.get(`users/getCategoryHighToLowRateProduct`, {
+      params: { categoryId }, // <--- send as query param
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching category HighToLowRateProduct product:", error);
+  }
+};
+
+
+export const getCategoryLowToHighRateProduct = async (categoryId) => {
+
+  try {
+    const response = await api.get(`users/getCategoryLowToHighRateProduct`, {
+      params: { categoryId }, // <--- send as query param
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching category LowToHighRateProduct product:", error);
   }
 };

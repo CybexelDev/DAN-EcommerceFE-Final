@@ -4,12 +4,14 @@ import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { saveOredr } from "../../API/userApi";
 
 function CheckoutSuccess() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const userId = useSelector((state) => state.auth.userId);
+  const address = useSelector((state) => state.deliveryAddress);
   console.log(userId, "userId in checkoutsuccess page >>>>>>>");
 
   const ranOnce = useRef(false);
@@ -22,10 +24,15 @@ function CheckoutSuccess() {
       const sessionId = searchParams.get("session_id");
       if (!sessionId || !userId) return;
 
-      await axios.post("http://localhost:3000/users/PaymentSuccess", {
-        sessionId,
-        userId,
-      });
+      const data = await saveOredr(sessionId, userId, address);
+
+      console.log(data, "order placed successfully");
+      
+          
+      // await axios.post("http://localhost:3000/users/PaymentSuccess", {
+      //   sessionId,
+      //   userId,
+      // });
     };
 
     saveOrder();

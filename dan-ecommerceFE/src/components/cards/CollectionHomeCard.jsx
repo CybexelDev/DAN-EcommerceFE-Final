@@ -1,16 +1,16 @@
 import React from 'react'
 import toprightarrowcircle from "../../assets/images/components/toprightarrowcircle.png"
-function CollectionHomeCard({image, category}) {
+function CollectionHomeCard({image, category, click}) {
   return (
-    <div className="w-full h-full bg-[#f2f2f2] rounded-[1vw] relative overflow-hidden cursor-pointer">
+    <div onClick={click} className="w-full h-full bg-[#f2f2f2] rounded-[1vw] relative overflow-hidden cursor-pointer ">
         {/* Text behind the image */}
-        <h4 className="absolute top-[5%] left-1/2 -translate-x-1/2  z-0 text-center text-[3vw] font-semibold leading-tight ">
+        <h4 className="absolute top-[5%] left-1/2 -translate-x-1/2  z-0 text-center  text-[7vw] md:text-[3.2vw] font-semibold leading-tight ">
             {category}
         </h4>
 
         {/* Image above text */}
         <img 
-            className="w-full h-full object-cover z-10 relative" 
+            className="w-full h-full object-cover z-10 relative  transform transition-transform duration-500 ease-in-out hover:scale-120" 
             src={image} 
             alt={category} 
         />

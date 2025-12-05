@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import OrderCard from "../cart/OrderCard";
+import OrderCard from "../../components/cards/OrderCard";
 import Nav from "../../components/nav/Nav";
 import { getOrders } from "../../API/userApi";
 import { useSelector } from "react-redux";
 import Footer from "../home/homeitems/Footer";
+import MobileNav from "../../components/nav/MobileNav";
+import SubNav from "../../components/nav/SubNav";
 
 const mockOrders = [
   {
@@ -93,7 +95,15 @@ const mockOrders = [
 
   return (
     <>
-    <Nav />
+
+    <div className="hidden lg:block">
+                    <Nav />
+                </div>
+                <div className="block lg:hidden ">
+                    <MobileNav />
+                </div>
+      <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
+
     <main className="min-h-screen bg-background p-6 mt-28">
       <div className="max-w-2xl mx-auto">
         <div className="mb-8">

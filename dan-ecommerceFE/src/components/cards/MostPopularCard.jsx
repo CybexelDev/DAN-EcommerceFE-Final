@@ -1,30 +1,92 @@
 import React from "react";
-import toprightarrowcircle from "../../assets/images/components/toprightarrowcircle.png"
+import toprightarrowcircle from "../../assets/images/components/toprightarrowcircle.png";
+import aedicon from "../../assets/images/main/aedicon.png"
 
 const MostPopularCard = ({ image, title, offer, price, click }) => {
   return (
-
-    <div onClick={click} className=" w-[31.11%] aspect- rounded-t-[1.5vw] flex flex-col cursor-pointer">
-      <div className="w-full aspect-square  rounded-[1.5vw] relative cursor-pointer">
-        <img className="w-full aspect-[1/1] rounded-[1.5vw] overflow-hidden object-cover object-center"
+    <div
+      onClick={click}
+      className="
+        group
+        w-full
+        flex flex-col
+        overflow-hidden
+        bg-white
+        cursor-pointer
+        transition-transform
+        duration-300
+        hover:scale-[1.01]
+      "
+    >
+      {/* 🖼️ Image Section */}
+      <div className="relative w-full aspect-[10/7.5] rounded-[5%] overflow-hidden">
+        <img
           src={image}
-          alt={title} />
-        <div className="absolute  bg-white w-[15.6%] aspect-square bottom-0 right-0 rounded-tl-[1.5vw]  flex justify-center items-center 
-                before:content-['']  before:absolute before:w-[1.5vw] before:h-[1.5vw] before:z-10 before:bg-[radial-gradient(circle_at_top_left,transparent_0%,_transparent_75%,_white_76%,_white_100%)] 
-                before:-top-[1.5vw] before:-right-0 before:mask-shape
-                after:content-[''] after:absolute after:w-[1.5vw] after:h-[1.5vw] after:z-10 after:bg-[radial-gradient(circle_at_top_left,transparent_0%,_transparent_75%,_white_76%,_white_100%)]
-                 after:bottom-0 after:-left-[1.5vw]">
-          <img className="w-[71.5%] aspect-square"
-            src={toprightarrowcircle} alt="tr arrow" />
+          alt={title}
+          className="
+            w-full h-full object-cover object-center
+            transition-transform duration-500
+            group-hover:scale-101
+          "
+        />
+
+        {/* ↗️ Corner Icon */}
+        <div
+          className="
+            absolute bg-white
+            w-[15%] aspect-square bottom-0 right-0
+            rounded-tl-[1vw]
+            flex justify-center items-center
+            before:content-['']
+            before:absolute before:w-[35%] before:h-[35%]
+            before:bg-[radial-gradient(circle_at_top_left,transparent_0%,transparent_75%,white_76%,white_100%)]
+            before:-top-[35%] before:-right-0
+            after:content-[''] after:absolute after:w-[35%] after:h-[35%]
+            after:bg-[radial-gradient(circle_at_top_left,transparent_0%,transparent_75%,white_76%,white_100%)]
+            after:bottom-0 after:-left-[35%]
+          "
+        >
+          <img
+            className="w-[70%] aspect-square rounded-[10%]"
+            src={toprightarrowcircle}
+            alt="arrow"
+          />
         </div>
       </div>
-      <div className="  w-full h-[18%]">
-        <h4 className=" md:text-[25px] text-[14px]">{title.length > 35 ?
-          title.slice(0, 35) + "..."
-          : title}
+
+      {/* 📝 Text Section */}
+      <div className="flex flex-col justify-start px-2 py-2">
+        <h4
+          className="
+            text-[clamp(1.1rem,2vw,2.4rem)] lg:text-[clamp(.9rem,1.3vw,1.7rem)]
+            font-semibold leading-tight text-gray-800
+          "
+        >
+          {title.length > 30 ? title.slice(0, 30) + "..." : title}
         </h4>
-        <h6 className="text-[1vw] font-bold">{offer}% offer</h6>
-        <p className="text-[0.9vw]">usd {price}</p>
+        <h6
+          className="
+            text-[clamp(.9rem,1.1vw,1.3rem)] lg:text-[clamp(1rem,1.5vw,1.9rem)]
+            font-bold 
+          "
+        >
+          {offer}% OFF
+        </h6>
+        <p
+  className="
+    text-[clamp(.9rem,1.3vw,1.7rem)] flex items-center
+    lg:text-[clamp(.9rem,1.1vw,1.5rem)]
+    text-gray-600
+  "
+>
+  <img
+    src={aedicon}
+    alt="AED"
+    className="h-[.77em] w-auto  mr-[0.4em] inline-block align-baseline"
+  />
+  {Number(price).toFixed(2)}
+</p>
+
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function HomeNav() {
   const navigate = useNavigate();
   return (
+ 
     <div className=' nav absolute flex top-[0] left-[0]  w-[42.5%]  bg-white   aspect-[100/11]  rounded-br-[2vw] z-10
     before:content-[""] before:w-[2vw] before:h-[2vw] before:absolute before:bg-[radial-gradient(circle_at_bottom_right,transparent_0%,_transparent_70%,_white_71%,_white_100%)] before:top-0 before:-right-[2vw]
     after:content-[""] after:w-[2vw] after:h-[2vw] after:absolute after:bg-[radial-gradient(circle_at_bottom_right,transparent_0%,_transparent_70%,_white_71%,_white_100%)] after:-bottom-[2vw] after:left-[0]'>

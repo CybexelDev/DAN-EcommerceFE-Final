@@ -1,8 +1,10 @@
+
 import React, { useEffect, useState } from 'react'
 import Nav from '../../components/nav/Nav'
 import Footer from '../home/homeitems/Footer'
 import { getBlogs } from '../../API/userApi';
-
+import SubNav from '../../components/nav/SubNav';
+import MobileNav from "../../components/nav/MobileNav";
 
 const blogs = [
     {
@@ -47,9 +49,9 @@ const BlogPage = () => {
     const [blogs, setBlogs] = useState([]);
 
     console.log(blogs, "blog data>>>>>>>>>>>>");
-    
 
-      useEffect(() => {
+
+    useEffect(() => {
         const fetchBlogs = async () => {
             try {
                 const data = await getBlogs();
@@ -62,8 +64,13 @@ const BlogPage = () => {
     }, []);
     return (
         <div>
-            <Nav />
-
+            <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
+            <div className="hidden lg:block">
+                <Nav />
+            </div>
+            <div className="block lg:hidden">
+                <MobileNav />
+            </div>
             <div className="min-h-screen bg-white text-black flex flex-col items-center py-10 px-4 md:px-10 mt-[100px]">
                 {/* Page Header */}
                 <div className="text-center mb-10">
@@ -133,13 +140,50 @@ const BlogPage = () => {
                         </div>
                     </div>
                 )}
-            </div>
+         
 
-            <div className='ml-5 mr-5'>
-                <Footer />
-            </div>
+
+          
+
+            {/* Blog Modal — exact same as BlogSection */}
+            {selectedBlog && (
+                <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 px-4">
+                    <div className="bg-white max-w-3xl w-full rounded-2xl overflow-hidden shadow-xl relative animate-fadeIn">
+                        {/* Close Button */}
+                        <button
+                            onClick={() => setSelectedBlog(null)}
+                            className="absolute top-4 right-4 text-gray-500 hover:text-orange-500 text-2xl"
+                        >
+                            ✕
+                        </button>
+
+                        <img
+                            src={selectedBlog.image[0]}
+                            alt={selectedBlog.head}
+                            className="w-full h-64 object-cover"
+                        />
+                        <div className="p-6">
+                            <h2 className="text-2xl md:text-3xl font-bold text-orange-500 mb-2">
+                                {selectedBlog.head}
+                            </h2>
+                            <p className="text-sm text-gray-500 mb-4">
+                                {selectedBlog?.author} • {selectedBlog?.date}
+                            </p>
+                            <p className="text-gray-700 text-base leading-relaxed">
+                                {selectedBlog.tittle}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-    )
-}
 
-export default BlogPage
+      {/* Footer */ }
+    <div className="px-4 sm:px-6 md:px-10 mt-10">
+        <Footer />
+    </div>
+    </div >
+  );
+};
+
+export default BlogPage;

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-// import Header from "../../Layout/Admin/Header/Header";
-// import UsersList from "../../Layout/Admin/UsersList/UsersList";
-// import AdminEnquiry from "../../Layout/Admin/Enquiry/AdminEnquiry";
-// import SubCategories from "../../Layout/Admin/SubCategories/SubCategories";
 import Sidebar from "../layouts/sidebar/Sidebar";
 import DashBoard from "../layouts/dashboard/Dashboard";
 import Products from "../layouts/products/Products";
 import Categories from "../layouts/categories/Categories";
-
+import Header from "../layouts/header/Header";
+import Orders from "../layouts/orders/Orders";
+import Testimaonials from "../layouts/testimonials/Testimaonials";
+import Users from "../layouts/users/Users";
+import { useSelector } from "react-redux";
 
 
 export default function Admin() {
@@ -21,6 +21,11 @@ export default function Admin() {
     }, [selectedTab]);
 
 
+
+
+
+
+
     const renderTabContent = () => {
 
 
@@ -31,14 +36,14 @@ export default function Admin() {
                 return <Products />;
             case "Categories":
                 return <Categories />;
-            // case "Users":
-            //     return <UsersList />;
-            // case "Enquiry":
-            //     return <AdminEnquiry />;
-            // case "Header":
-            //     return <Header />;
-            // case "SubCategories":
-            //     return <SubCategories />;
+                case "Header":
+                return <Header/>;
+            case "Orders":
+                return <Orders/>;
+            case "Testimonials":
+                return <Testimaonials/>;
+            case "Users":
+                return <Users />;
             default:
                 return <></>;
         }

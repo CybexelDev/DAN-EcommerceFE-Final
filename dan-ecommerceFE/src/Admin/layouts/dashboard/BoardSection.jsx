@@ -16,9 +16,9 @@ export default function BoardSection({totalItems}) {
           rate={totalItems?.categories}
         />
         <DashboardStats
-          title={"Total enquiries"}
+          title={"Total orders"}
           icon={<MessagesSquare className="w-6 h-6" />}
-          rate={totalItems?.enquiries}
+          rate={totalItems?.orders}
         />
         <DashboardStats
           title={"Total users"}

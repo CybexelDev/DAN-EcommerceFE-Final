@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronRight, Package, Truck, CheckCircle2 } from "lucide-react";
+import { ChevronRight, Package, Truck, CheckCircle2, House } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
  function OrderCard({
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
   products,
   orderStatus,
   createdAt,
+  address,
   onViewDetails,
   onTrack,
 }) {
@@ -40,6 +41,9 @@ import { useNavigate } from "react-router-dom";
 
   const navigate = useNavigate();
 
+ 
+  
+
   const config = statusConfig[orderStatus];
   const StatusIcon = config.icon;
 
@@ -48,7 +52,8 @@ import { useNavigate } from "react-router-dom";
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <p className="text-sm text-gray-500">Order ID</p>
-          <p className="font-semibold text-lg">{_id}</p>
+          <p className="font-semibold text-[11px] max-w-[150px] break-all">{_id}</p>
+        {address?.length > 0 && (<p className="mt-2 flex gap-2 text-gray-500"><House className="w-4 h-4 mt-1.5" /> {address[0]?.area}, {address[0]?.city}, {address[0]?.pincode}</p>) }
         </div>
         <div
           className={`flex items-center gap-1 px-3 py-1 rounded-full ${config.bgColor} ${config.textColor} text-sm font-medium`}
@@ -58,7 +63,7 @@ import { useNavigate } from "react-router-dom";
         </div>
       </div>
 
-      {createdAt && <p className="text-sm text-gray-500 mb-4">{createdAt}</p>}
+      {createdAt && <p className="text-sm text-gray-500 mb-4">{createdAt.split("T")[0]}</p>}
 
       <div className="mb-4">
         <p className="text-sm font-medium text-gray-900 mb-3">

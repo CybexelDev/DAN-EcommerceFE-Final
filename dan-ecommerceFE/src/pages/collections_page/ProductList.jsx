@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ProductListCard from "../../components/cards/ProductListCard";
-import drinkpurple from "../../assets/images/collections_page/drinkpurple.png";
-import drinkgreen from "../../assets/images/collections_page/drinkgreen.png";
-import drinkyellow from "../../assets/images/collections_page/drinkyellow.png";
 import { useNavigate } from "react-router-dom";
 
 
@@ -32,19 +29,41 @@ const ProductList = ({ isOpen, productData, productLengthdata }) => {
 
 
   return (
-    <div className="w-full h-full flex flex-wrap gap-5 justify-start">
-      {product?.slice(0, isOpen ? 9 : 12)?.map((product) => (
-        <ProductListCard
-          key={product._id}
-          click={() => navigate(`/product/${product._id}`)}
-          id={product._id}
-          title={product.productName}
-          image={product.images[0]}
-          price={product.rate}
-          isOpen={isOpen} />
+    <div
+  className={`w-full h-full pt-[3%]  grid  
+  ${isOpen ? 'grid-cols-1 md:grid-cols-3 grid-rows-5 md:grid-rows-3 gap-[5vw] md:gap-[3vw] px-[10%] md:p-[0%]' : 'grid-cols-2  md:grid-cols-4 grid-rows-5 md:grid-rows-3 gap-[5vw] md:gap-[3vw]'} 
+  justify-between items-stretch  pt-[7%] md:pt-[7%] lg:pt-[3%]`}
+>
+   {product?.length > 0 ?  
+      (
+  product?.slice(0, isOpen ? 9 : 12)?.map((product) => (
+    <ProductListCard
+      key={product._id}
+      click={() => navigate(`/product/${product._id}`)}
+      id={product._id}
+      title={product.productName}
+      image={product.images[0]}
+      price={product.discountedRate}
+      isOpen={isOpen}
+    />
+  ))
+):( <div className="col-span-full text-center text-gray-500">
+      No products found.
+    </div>)}
+     
 
-      ))}
-    </div>
+  {/* Fill remaining empty grid cells */}
+  {Array.from({
+    length: (isOpen ? 9 : 12) - (product?.length || 0),
+  }).map((_, index) => (
+    <div
+      key={`empty-${index}`}
+      className="bg-transparent"
+    ></div>
+  ))}
+</div>
+
+
   );
 };
 
