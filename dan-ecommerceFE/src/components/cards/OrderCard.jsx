@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronRight, Package, Truck, CheckCircle2, House } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import aedicon from "../../assets/images/main/aedicon.png"
 
  function OrderCard({
   _id,
@@ -88,9 +89,22 @@ import { useNavigate } from "react-router-dom";
                     Qty: {product.quantity}
                   </p>
                 </div>
-                <p className="font-medium text-gray-900">
-                  ${(product.price * product.quantity).toFixed(2)}
-                </p>
+                {/* <p className="font-medium text-gray-900">
+                  {(product.price * product.quantity).toFixed(2)}
+                </p> */}
+                <div
+                  className="
+                  font-medium text-gray-900
+                    flex items-center justify-center sm:justify-end
+                  "
+                >
+                  <img
+                    src={aedicon}
+                    alt="AED"
+                    className="h-[.7em] w-auto mr-[0.3em] inline-block align-baseline"
+                  />
+                  {(product.price*product.quantity).toFixed(2)}
+                </div>
               </div>
             </div>
           ))}
@@ -108,9 +122,22 @@ import { useNavigate } from "react-router-dom";
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm text-gray-500">Total</p>
-          <p className="text-xl font-bold text-gray-900">
+          {/* <p className="text-xl font-bold text-gray-900">
             ${totalAmount.toFixed(2)}
-          </p>
+          </p> */}
+           <div
+              className="
+              text-xl font-bold text-gray-900
+                flex items-center justify-center sm:justify-end
+              "
+            >
+              <img
+                src={aedicon}
+                alt="AED"
+                className="h-[.7em] w-auto mr-[0.3em] inline-block align-baseline"
+              />
+              {totalAmount.toFixed(2)}
+            </div>
         </div>
         <div className="flex gap-2">
           {orderStatus === "shipped" && onTrack && (

@@ -62,7 +62,7 @@ function CartHome() {
         <div className="block lg:hidden">
           <MobileNav />
         </div>
-      <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
+      <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end  absolute right-[3%]  top-1 z-40`} />
         {/* Header */}
         <div className="w-full pt-[10vw]">
           <h5 className="font-bold text-[clamp(1.2rem,2.1vw,2rem)] mb-[2vw]">Shopping Cart.</h5>

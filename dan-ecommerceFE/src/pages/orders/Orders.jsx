@@ -102,7 +102,7 @@ const mockOrders = [
                 <div className="block lg:hidden ">
                     <MobileNav />
                 </div>
-      <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-10 top-1 z-40`} />
+      <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-[4%] top-1 z-40`} />
 
     <main className="min-h-screen bg-background p-6 mt-28">
       <div className="max-w-2xl mx-auto">

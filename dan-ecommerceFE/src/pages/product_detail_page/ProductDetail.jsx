@@ -13,7 +13,10 @@ import Footer from '../home/homeitems/Footer';
 import { loadStripe } from '@stripe/stripe-js';
 import MobileNav from '../../components/nav/MobileNav';
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import SubNav from '../../components/nav/SubNav';
+import aedicon from "../../assets/images/main/aedicon.png"
 import { useSelector } from "react-redux";
+
 
 
 
@@ -185,7 +188,7 @@ function ProductDetail() {
 
 
     return (
-        <div className=' my-[5vw] lg:my-[0vw]'>
+        <div className=' my-[5vw] pt-[9%] md:pt-[0%] lg:my-[0vw]'>
             <div className='w-full  '>
                 {/* Nav Section Start */}
                 <div className="relative w-full aspect-[1440/132] hidden lg:block">
@@ -194,6 +197,7 @@ function ProductDetail() {
                 <div className="block lg:hidden ">
                     <MobileNav />
                 </div>
+                <SubNav subMinDiv={`w-[100%]  h-[35px]  flex gap-4 items-center justify-end pr-2 absolute right-[3.12%] top-1 z-40`} />
                 {/* Nav Section End */}
 
                 {/* Main  section */}
@@ -250,14 +254,13 @@ function ProductDetail() {
                       </div>
                     </div>
                     {/* Main Image Section Ends */}
-
                     <div className="lg:w-[46.76%]  w[100%]  ">
                         <div className="w-full h-[85%]   flex flex-col justify-between">
                             <div className="w-full flex flex-col justify-between">
                                 <div className="w-full h-[55%] flex flex-col justify-between">
-                                    <div className="w-full h-[75%]  flex">
+                                    <div className="w-full h-[%]  flex">
                                         <div className="w-[90.12%] h-full flex flex-col justify-between">
-                                            <div className="w-full h-[69.26%] flex flex-col justify-start gap-[.5rem] lg:gap-[2rem]">
+                                            <div className="w-full h-[] flex flex-col justify-start gap-[.5rem] lg:gap-[2rem]">
                                                 <div className="w-full h-[15.16%] flex justify-start items-center ">
                                                     <p className='text-[1.3rem] text-black/50 font-semibold'>{products.brandName}</p>
                                                 </div>
@@ -300,20 +303,32 @@ function ProductDetail() {
                                                 </div>
 
                                             </div>
-                                            <div className="w-full h-[15%]  ">
-                                                <div className="h-full aspect-[165/47] flex gap-2 items-center">
-                                                    {/* Original Price (Strikethrough) */}
-                                                    <p className="text-[13px] text-gray-500 line-through flex">
-                                                        AED{products.rate}
-                                                    </p>
+                                            <div className="w-full h-[%] my-[2%] ">
+                                              <div className="h-full flex items-center justify-start gap-[3%] ">
 
-                                                    {/* Discounted Price */}
-                                                    <p className="text-[31px] text-[#7C0101] flex font-semibold">
-                                                        AED{products.discountedRate}.00
-                                                    </p>
+                                                {/* Original Price */}
+                                                <div className="text-[13px] text-gray-500 line-through flex items-center">
+                                                  <img
+                                                    src={aedicon}
+                                                    alt="AED"
+                                                    className="h-[0.8em] w-auto mr-[0.3em] inline-block"
+                                                  />
+                                                  {products?.rate?.toFixed(2)}
                                                 </div>
 
+                                                {/* Discounted Price */}
+                                                <div className="text-[31px] text-[#7C0101] font-semibold flex items-center">
+                                                  <img
+                                                    src={aedicon}
+                                                    alt="AED"
+                                                    className="h-[0.9em] w-auto mr-[0.1em] inline-block"
+                                                  />
+                                                  {products?.discountedRate?.toFixed(2)}
+                                                </div>
+
+                                              </div>
                                             </div>
+
                                         </div>
                                         <div className="w-[9.88%] h-full "></div>
                                     </div>
@@ -402,86 +417,86 @@ function ProductDetail() {
                            
 
                               <div className="w-full flex flex-col justify-between">
-  {/* Header + Buttons */}
-  <div className="w-full h-[12.61%] flex justify-between items-center">
-    <h5 className="text-[1.5rem] font-semibold">You may also like</h5>
+                                {/* Header + Buttons */}
+                                <div className="w-full h-[12.61%] flex justify-between items-center">
+                                  <h5 className="text-[1.5rem] font-semibold">You may also like</h5>
 
-    {/* Navigation Buttons (Desktop Only) */}
-    <div className="gap-2 hidden lg:flex">
-      <button
-        onClick={scrollLeft}
-        className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
-      >
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </button>
-      <button
-        onClick={scrollRight}
-        className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
-      >
-        <svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button>
-    </div>
-  </div>
+                                  {/* Navigation Buttons (Desktop Only) */}
+                                  <div className="gap-2 hidden lg:flex">
+                                    <button
+                                      onClick={scrollLeft}
+                                      className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
+                                    >
+                                      <svg
+                                        className="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M15 19l-7-7 7-7"
+                                        />
+                                      </svg>
+                                    </button>
+                                    <button
+                                      onClick={scrollRight}
+                                      className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
+                                    >
+                                      <svg
+                                        className="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M9 5l7 7-7 7"
+                                        />
+                                      </svg>
+                                    </button>
+                                  </div>
+                                </div>
 
-  {/* Scrollable Container */}
-  <div
-    ref={scrollContainerRef}
-    className="w-full h-full flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth mt-4 px-1"
-  >
-    {relatedProducts.map((product) => (
-      <div
-        key={product?._id}
-        className="
-          flex-shrink-0 
-          w-1/3            /* Desktop: 3 per row */
-          max-md:w-1/2     /* Tablet: 2 per row */
-          max-sm:w-[85%]   /* Mobile: 1 per view (bigger card) */
-          transition-all duration-300
-        "
-      >
-        <RelatedItemsCard
-          image={product?.images?.[0]}
-          title={product?.productName}
-          itemLink={product?._id}
-        />
-      </div>
-    ))}
-  </div>
+                                {/* Scrollable Container */}
+                                <div
+                                  ref={scrollContainerRef}
+                                  className="w-full h-full flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth mt-4 px-1"
+                                >
+                                  {relatedProducts.map((product) => (
+                                    <div
+                                      key={product?._id}
+                                      className="
+                                        flex-shrink-0 
+                                        w-1/3            /* Desktop: 3 per row */
+                                        max-md:w-1/2     /* Tablet: 2 per row */
+                                        max-sm:w-[85%]   /* Mobile: 1 per view (bigger card) */
+                                        transition-all duration-300
+                                      "
+                                    >
+                                      <RelatedItemsCard
+                                        image={product?.images?.[0]}
+                                        title={product?.productName}
+                                        itemLink={product?._id}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
 
-  <style jsx>{`
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-  `}</style>
-</div>
+                                <style jsx>{`
+                                  .scrollbar-hide::-webkit-scrollbar {
+                                    display: none;
+                                  }
+                                  .scrollbar-hide {
+                                    -ms-overflow-style: none;
+                                    scrollbar-width: none;
+                                  }
+                                `}</style>
+                              </div>
 
 
                             {/* You may also like section */}
