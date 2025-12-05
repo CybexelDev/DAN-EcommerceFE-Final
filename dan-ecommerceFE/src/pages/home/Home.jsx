@@ -14,7 +14,7 @@ function Home() {
   return (
     <div className='px-[3.8%] pt-[3%]  bg-white w-full h-[100]'>
       <div className="md:pb-[4%] pb-[7%] ">
-      <SubNav subMinDiv="w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2 absolute right-15 top-1 z-40" />
+      <SubNav subMinDiv="w-[100%] h-[35px] bg-transparent flex gap-4 items-center justify-end pr-2 absolute block right-2 md:right-15 top-[3px] md:top-1 z-40" />
 
         <Hero />
       </div>

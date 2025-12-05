@@ -34,17 +34,23 @@ const ProductList = ({ isOpen, productData, productLengthdata }) => {
   ${isOpen ? 'grid-cols-1 md:grid-cols-3 grid-rows-5 md:grid-rows-3 gap-[5vw] md:gap-[3vw] px-[10%] md:p-[0%]' : 'grid-cols-2  md:grid-cols-4 grid-rows-5 md:grid-rows-3 gap-[5vw] md:gap-[3vw]'} 
   justify-between items-stretch  pt-[7%] md:pt-[7%] lg:pt-[3%]`}
 >
-  {product?.slice(0, isOpen ? 9 : 12)?.map((product) => (
+   {product?.length > 0 ?  
+      (
+  product?.slice(0, isOpen ? 9 : 12)?.map((product) => (
     <ProductListCard
       key={product._id}
       click={() => navigate(`/product/${product._id}`)}
       id={product._id}
       title={product.productName}
       image={product.images[0]}
-      price={product.rate}
+      price={product.discountedRate}
       isOpen={isOpen}
     />
-  ))}
+  ))
+):( <div className="col-span-full text-center text-gray-500">
+      No products found.
+    </div>)}
+     
 
   {/* Fill remaining empty grid cells */}
   {Array.from({

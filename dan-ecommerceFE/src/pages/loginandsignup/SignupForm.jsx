@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import RightInfo from "./RightInfo";
+import { emailLogin, mobilLogin, verifyEmailLogin, verifyMobilLogin } from "../../API/userApi";
 // import { signupEmail, signupMobile, verifySignupEmail, verifySignupMobile } from "../../API/userApi";
 
 const SignupForm = () => {
@@ -19,10 +20,12 @@ const SignupForm = () => {
     e.preventDefault();
     try {
       if (isEmail(value)) {
-        // await signupEmail(value);
+          const response = await emailLogin(value);
+           console.log(response, "email signup response >>>>>>");
         setStep(2);
       } else if (isMobile(value)) {
-        // await signupMobile(value);
+        const response = await mobilLogin(value);
+        console.log(response, "mobile signup response >>>>>>");
         setStep(2);
       } else {
         setError("Please enter a valid email or mobile number.");
@@ -33,29 +36,82 @@ const SignupForm = () => {
   };
 
   // Step 2: Verify OTP
-  const handleOtpSubmit = async (e) => {
-    e.preventDefault();
-    if (otp.length !== 6) return setError("OTP must be 6 digits");
+  // const handleOtpSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (otp.length !== 6) return setError("OTP must be 6 digits");
 
-    try {
-      const response = isEmail(value)
-        ? /* await verifySignupEmail(value, otp) */ { user: { email: value, id: "1" }, token: "abc" }
-        : /* await verifySignupMobile(value, otp) */ { user: { phone: value, id: "1" }, token: "abc" };
+  //   try {
+  //     const response = isEmail(value)
+  //       ? /* await verifySignupEmail(value, otp) */ { user: { email: value, id: "1" }, token: "abc" }
+  //       : /* await verifySignupMobile(value, otp) */ { user: { phone: value, id: "1" }, token: "abc" };
 
-      dispatch({
-        type: "SET_USER",
-        payload: {
-          username: isEmail(value)
-            ? response?.user?.email
-            : response?.user?.phone,
-          accessToken: response?.token,
-          userId: response?.user?.id,
-        },
-      });
-    } catch {
-      setError("OTP verification failed.");
+  //     dispatch({
+  //       type: "SET_USER",
+  //       payload: {
+  //         username: isEmail(value)
+  //           ? response?.user?.email
+  //           : response?.user?.phone,
+  //         accessToken: response?.token,
+  //         userId: response?.user?.id,
+  //       },
+  //     });
+  //   } catch {
+  //     setError("OTP verification failed.");
+  //   }
+  // };
+
+  
+    const handleOtpSubmit = async (e) => {
+      e.preventDefault();
+  
+      if (otp.length !== 6) {
+        setError("Otp must be 6 digits")
+      }
+  
+      if (isEmail(value)) {
+        try {
+          const response = await verifyEmailLogin(value, otp);
+  
+          console.log(response, "email otp verify response >>>>>>");
+  
+          dispatch({
+            type: "SET_USER",
+            payload: {
+              username: response?.user?.email,
+              accessToken: response?.token,
+              userId: response?.user?._id,
+            },
+          });
+  
+         navigate('/')
+  
+        } catch {
+          setError("OTP verification failed.");
+        }
+      } else if (isMobile(value)) {
+        try {
+          const response = await verifyMobilLogin(value, otp);
+  
+          console.log(response, "mobile number otp verify response >>>>>>");
+  
+            dispatch({
+            type: "SET_USER",
+            payload: {
+              username: response?.user?.phone,
+              accessToken: response?.token,
+              userId: response?.user?._id,
+            },
+          });
+  
+          navigate('/')
+  
+        } catch {
+          setError("OTP verification failed.");
+        }
+      }
+  
     }
-  };
+  
 
   return (
     <div className="flex flex-col lg:flex-row justify-between items-stretch gap-[2vw]">
