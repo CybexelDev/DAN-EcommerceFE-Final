@@ -73,12 +73,10 @@ function Footer() {
                 </div>
             </div>
             <div className="w-[100%] h-full lg:h-[10%] flex lg:justify-start justify-center mt-[4vw] md:mt-[2vw] md:my-[1vw]  items-center ">
-                <h6 className='text-[3.5vw] font-semibold md:text-[1.5vw] text-black/65'>Copyright <span className='font-semibold text-black'>Daralnahdatrading</span> <span className=''>©</span> 2024</h6>
+                <h6 className='text-[3.5vw] font-semibold md:text-[1.5vw] text-black/65'>Copyright <span className='font-semibold text-black' onClick={()=>navigate('/admin')}>Daralnahdatrading</span> <span className=''>©</span> 2024</h6>
             </div>
         </div>
         {/* Main Section End */}
-
-
 
         <div className="h-[7%] w-full  ">
                     
