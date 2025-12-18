@@ -19,7 +19,7 @@ const MostPopularCard = ({ image, title, offer, price, click }) => {
       "
     >
       {/* 🖼️ Image Section */}
-      <div className="relative w-full aspect-[10/7.5] rounded-[5%] overflow-hidden">
+      <div className="relative w-full aspect-[10/6.8] rounded-[6%] overflow-hidden">
         <img
           src={image}
           alt={title}

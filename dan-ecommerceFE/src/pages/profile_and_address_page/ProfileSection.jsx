@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import trucktrack from '../../assets/images/login/trucktrack.png'
 import alertbell from '../../assets/images/login/alertbell.png'
 import reviewstar from '../../assets/images/login/reviewstar.png'
@@ -6,16 +6,25 @@ import { useDispatch } from "react-redux";
 import { FaUser } from "react-icons/fa";
 import { FiCheckCircle } from "react-icons/fi";
 // import { logout } from '../../redux/app/store'
+import { useNavigate } from 'react-router-dom';
 
 function ProfileSection() {
   const [isOpen, setIsopen] = useState(false)
   const name = localStorage.getItem("userName");
+  const token = localStorage.getItem("accessToken");
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const handleClick = () => {
     setIsopen((prev) => !prev)
   }
 
+  useEffect(() => {
+    if(!token){
+    setIsopen(true)
+  }
+  }, []);
+  
 
   const handleLogout = () => {
     // Clear localStorage
@@ -29,6 +38,9 @@ function ProfileSection() {
     // Redirect
     window.location.href = "/";
   };
+  const handleSignup = () => {
+   navigate('/login')
+  }
 
   return (
     <div className="relative flex flex-col w-full bg-white aspect-[100/15] shadow-xl  rounded-b-[1vw] rounded-tl-[1vw] p-[2vh] lg:p-[2vw] pl-[2.2%] my-[3vw] lg:my-[1.5vw]">
@@ -42,7 +54,7 @@ function ProfileSection() {
           onClick={handleClick}
           className="w-[88.28%] h-[56.66%] bg-[#D8D8D8] font-semibold text-[4vw] md:text-[3vw] lg:text-[1.3vw] text-center rounded-full hover:text-red-500 hover:scale-105 transition-all duration-300 ease-in-out"
         >
-          { isOpen ? "close" : "change" }
+          { isOpen ? "Close" : "Open" }
         </button>
       </div>
 
@@ -77,8 +89,8 @@ function ProfileSection() {
 
           {isOpen ? (
             <div className="w-full flex  lg:ml-[15%]  items-center justify-center md:justify-start  mt-[2vw]">
-              <button onClick={handleLogout } className='w-[50%] md:w-[50%] lg:w-[60%] aspect-[5/1] bg-black text-white rounded-[4vw] md:rounded-[3vw] font-semibold text-[5vw] md:text-[5vw] lg:text-[1.9vw] xl:text-[1.5vw]
-               hover:text-orange-500 hover:scale-105 transition-all duration-300 ease-in-out '>Logout</button>
+              <button onClick={() => token ? handleLogout() : handleSignup()} className='w-[50%] md:w-[50%] lg:w-[60%] aspect-[5/1] bg-black text-white rounded-[4vw] md:rounded-[3vw] font-semibold text-[5vw] md:text-[5vw] lg:text-[1.9vw] xl:text-[1.5vw]
+               hover:text-orange-500 hover:scale-105 transition-all duration-300 ease-in-out '> {token? "Logout" : "Login"}</button>
             </div>
           ) : null}
         </div>

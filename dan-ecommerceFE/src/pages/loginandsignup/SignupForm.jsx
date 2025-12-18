@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import RightInfo from "./RightInfo";
 import { emailLogin, mobilLogin, verifyEmailLogin, verifyMobilLogin } from "../../API/userApi";
+import { useNavigate } from "react-router-dom";
 // import { signupEmail, signupMobile, verifySignupEmail, verifySignupMobile } from "../../API/userApi";
 
 const SignupForm = () => {
@@ -11,7 +12,8 @@ const SignupForm = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
   const isEmail = (input) => /\S+@\S+\.\S+/.test(input);
   const isMobile = (input) => /^[0-9]{6,15}$/.test(input);
 
@@ -71,19 +73,19 @@ const SignupForm = () => {
       if (isEmail(value)) {
         try {
           const response = await verifyEmailLogin(value, otp);
-  
-          console.log(response, "email otp verify response >>>>>>");
-  
-          dispatch({
-            type: "SET_USER",
-            payload: {
-              username: response?.user?.email,
-              accessToken: response?.token,
-              userId: response?.user?._id,
-            },
-          });
-  
-         navigate('/')
+         
+                 console.log(response, "email otp verify response >>>>>>");
+         
+                 dispatch({
+                   type: "SET_USER",
+                   payload: {
+                     username: response?.user?.email,
+                     accessToken: response?.token,
+                     userId: response?.user?._id,  
+                   },
+                 });
+         
+                navigate('/')
   
         } catch {
           setError("OTP verification failed.");

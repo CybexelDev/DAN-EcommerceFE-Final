@@ -6,7 +6,6 @@ import Nav from "../../components/nav/Nav";
 import MobileNav from "../../components/nav/MobileNav";
 import SubNav from "../../components/nav/SubNav";
 
-
 const SupportPage = () => {
     const [formData, setFormData] = useState({ name: "", email: "", message: "" });
     const [isSent, setIsSent] = useState(false);
@@ -57,17 +56,17 @@ const SupportPage = () => {
                         {
                             icon: <Phone size={36} />,
                             title: "Call Us",
-                            text: "+91 98765 43210",
+                            text: "+971 50 983 6868, +971 55 968 8846",
                         },
                         {
                             icon: <Mail size={36} />,
                             title: "Email Us",
-                            text: "support@yourstore.com",
+                            text: "info@daralnahdatrading.com",
                         },
                         {
                             icon: <MapPin size={36} />,
                             title: "Visit Us",
-                            text: "123, E-commerce Street, New Delhi",
+                            text: "Dar Al Nahda Trading LLC, Ind Area – 11 Near Al Sama Printing Press Sharjah. United Arab Emirates.PO BOX 5637",
                         },
                     ].map((item, index) => (
                         <motion.div

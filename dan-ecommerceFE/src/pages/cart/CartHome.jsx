@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import Nav from '../../components/nav/Nav'
 import PaymentCard from '../../components/cards/PaymentCard'
@@ -10,6 +9,7 @@ import Footer from '../home/homeitems/Footer'
 import SubNav from '../../components/nav/SubNav'
 import MobileNav from '../../components/nav/MobileNav';
 import { useNavigate } from 'react-router-dom';
+import { toastSuccess } from '../../utils/toast'
 
 
 function CartHome() {
@@ -30,6 +30,7 @@ function CartHome() {
   const handleDelete = async (productId) => {
     const data = await removeCart(productId, userId);
     if (data.message === "Item removed from cart successfully") {
+      toastSuccess("Item removed");
       fetchCart();
       setRenderKey(prev => prev + 1);
     }
@@ -43,7 +44,6 @@ function CartHome() {
     );
 
     try {
-
       const data = await updateQuantity(userId, id, newQty)
       setRenderKey(prev => prev + 1);
       console.log(data, 'product Qty upadate');

@@ -16,26 +16,28 @@ import SupportPage from './pages/SupportPage/SupportPage';
 import CheckoutSuccess from './components/paymentStatus/CheckoutSuccess';
 import OrdersPage from './pages/orders/Orders';
 import { useState } from 'react';
+import Whatsapp from './components/wtsp/Whatsapp';
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
-  const [count, setCount] = useState(0)
-    const { username, accessToken, isLoggedIn, } = useSelector((state) => state.auth);
-     const {adminToken} = useSelector((state) => state.adminLogin);
+  const [count, setCount] = useState(0);
+  const { username, accessToken, isLoggedIn, } = useSelector((state) => state.auth);
+  const {adminToken} = useSelector((state) => state.adminLogin);
 
    console.log(adminToken , "99999999999999999999999999999" );
 
   const token = localStorage.getItem("accessToken");
 
   return (
+    <>
     <Router>
       <Routes>
 
         {adminToken? <Route path="/admin/dashboard" element={<Admin />} />  :  <Route path="/admin" element={<AdminLogin />} />}
-
             {/* <Route path="*" element={<Home />} /> */}
-
             <Route path="/" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/collections/:id" element={<CollectionsPage />} />
@@ -48,10 +50,21 @@ function App() {
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/login" element={<LoginAndSignup />} />
             <Route path="/admin" element={<AdminLogin />} />
-     
       </Routes>
     </Router>
 
+    <Whatsapp />
+    <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="light"
+      />
+</>
   )
 }
 

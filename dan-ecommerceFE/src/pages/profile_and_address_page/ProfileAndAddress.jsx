@@ -7,6 +7,8 @@ import MobileNav from '../../components/nav/MobileNav';
 import Footer from '../home/homeitems/Footer.jsx'
 
 function ProfileAndAddress() {
+  const token = localStorage.getItem("accessToken");
+
   return (
     <div className='w-full min-h-[80vh] bg-[#f2f2f2]  relative pt-[5%] md:pt-[5%] lg:pt-[10.22%] px-[3.12%]  pb-[2vw] mb-[9vw] md:mb-[2vw] '>
       {/* Nav Section */}
@@ -21,9 +23,9 @@ function ProfileAndAddress() {
       <div className="w-full  flex flex-col lg:flex-row justify-between gap-[2vw] mb-[2vw]">
         {/* Left Section */}
         <div className="lg:w-[63%]  w-full  flex flex-col gap-[12vw] md:gap-[10vw] lg:gap-[2vw]">
-
           <ProfileSection />
-          <AddressSection />
+          {token && <AddressSection />}
+          
         </div>
 
         {/* Right Section (Stacks below on small screens) */}
