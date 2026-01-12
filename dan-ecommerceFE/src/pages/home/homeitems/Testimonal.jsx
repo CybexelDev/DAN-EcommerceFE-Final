@@ -3,6 +3,7 @@ import TestimonialCard from "../homeitems/TestimonalCard";
 import TestimonalButton from "./TestimonalButton";
 import TestimonalClients from "./TestimonalClients";
 import { getBrand, getTestimaonial } from "../../../API/userApi";
+import  './testimanial.css'
 
 function Testimonal() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,7 +61,7 @@ function Testimonal() {
             rating={currentTestimonial?.starRating}
             name={currentTestimonial?.name}
           />
-                      
+
         </div>
         <div className="H-[25%]">
           <TestimonalClients clients={brand} />
@@ -82,21 +83,21 @@ function Testimonal() {
               </p>
             </div> */}
             <div
-  className="
+              className="
     flex items-center justify-center mb-4 
     h-[30vw] sm:h-[28vw] md:h-[25vw] 
     overflow-hidden relative
   "
->
-  <p
-    className="
+            >
+              <p
+                className="
       text-center text-[4.2vw] font-medium italic text-gray-700 
       leading-snug px-2 line-clamp-4 overflow-hidden
     "
-  >
-    “{currentTestimonial?.message}”
-  </p>
-</div>
+              >
+                “{currentTestimonial?.message}”
+              </p>
+            </div>
 
 
             {/* Bottom Half - Image + Name + Rating */}
@@ -105,9 +106,8 @@ function Testimonal() {
               <button
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
-                className={`absolute left-0 text-[7vw] font-semibold px-2 ${
-                  currentIndex === 0 ? "opacity-30" : "opacity-100"
-                }`}
+                className={`absolute left-0 text-[7vw] font-semibold px-2 ${currentIndex === 0 ? "opacity-30" : "opacity-100"
+                  }`}
               >
                 &lt;
               </button>
@@ -142,11 +142,10 @@ function Testimonal() {
               <button
                 onClick={handleNext}
                 disabled={currentIndex === testimonals.length - 1}
-                className={`absolute right-0 text-[7vw] font-semibold px-2 ${
-                  currentIndex === testimonals.length - 1
+                className={`absolute right-0 text-[7vw] font-semibold px-2 ${currentIndex === testimonals.length - 1
                     ? "opacity-30"
                     : "opacity-100"
-                }`}
+                  }`}
               >
                 &gt;
               </button>
@@ -160,20 +159,22 @@ function Testimonal() {
         {/* ✅ Container 2 - Clients Section */}
         <div className="bg-black/10 w-full rounded-[4vw] shadow-sm px-4 py-6">
           <p className="text-[4vw] text-gray-800 font-semibold mb-3 text-center">
-            Our Trusted Partners
+            Our Trusted Clients
           </p>
-          <div className="w-full flex justify-between items-center gap-3">
-            {brand.slice(0, 4).map((b, i) => (
-              <img
-                key={i}
-                src={b.image?.[0]}
-                alt={b.brandName}
-                className="w-[18vw] h-auto object-contain opacity-80"
-              />
-            ))}
+
+          <div className="relative overflow-hidden w-full">
+            <div className="flex items-center gap-3 w-max animate-logo-slide">
+              {[...brand, ...brand].map((b, i) => (
+                <img
+                  key={i}
+                  src={b.image?.[0]} 
+                  alt={b.brandName}
+                  className="w-[18vw] h-auto object-contain opacity-80 flex-shrink-0"
+                />
+              ))}
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import MobileNav from '../../components/nav/MobileNav';
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { toastSuccess } from '../../utils/toast';
 
 
 
@@ -45,6 +46,7 @@ function ProductDetail() {
     const increase = () => {
         setQuantity((prev) => prev + 1);
     };
+    
     useEffect(() => {
 
         // const data = getSingleProduct(id);
@@ -93,9 +95,7 @@ function ProductDetail() {
         const data = await addCart(userId, productId, quantity);
         console.log("Cart updated:", data);
         setQuantity(1); 
-        alert("Product added to cart!");
     }
-
 
 
     const scrollContainerRef = useRef(null);
@@ -203,7 +203,7 @@ function ProductDetail() {
                     {/* Main image section */}
                     <div className="relative lg:w-[51.23%] w-full">
                       {/* Aspect ratio wrapper — maintains fixed shape */}
-                      <div className="aspect-[687/684] max-md:aspect-[4/5] relative  rounded-[5%] overflow-hidden">
+                      <div className="aspect-[687/550] max-md:aspect-[4/5] relative  rounded-[5%] overflow-hidden">
                         
                         {/* Cart icon container */}
                         <div

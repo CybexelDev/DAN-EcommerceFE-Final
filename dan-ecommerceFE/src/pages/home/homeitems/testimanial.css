@@ -1,0 +1,12 @@
+@keyframes logoSlide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-slide {
+  animation: logoSlide 20s linear infinite;
+}

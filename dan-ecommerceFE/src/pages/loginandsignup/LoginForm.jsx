@@ -8,6 +8,7 @@ import {
 } from "../../API/userApi";
 import RightInfo from "./RightInfo";
 import { useNavigate } from "react-router-dom";
+import { toastError, toastSuccess } from "../../utils/toast";
 // import { login } from "../../redux/app/store";
 
 
@@ -133,13 +134,14 @@ const LoginForm = () => {
           payload: {
             username: response?.user?.email,
             accessToken: response?.token,
-            userId: response?.user?._id,
+            userId: response?.user?._id,  
           },
         });
-
+      toastSuccess("Login Successful!");
        navigate('/')
 
       } catch {
+        toastError("OTP verification failed or expired.");
         setError("OTP verification failed.");
       }
     } else if (isMobile(value)) {

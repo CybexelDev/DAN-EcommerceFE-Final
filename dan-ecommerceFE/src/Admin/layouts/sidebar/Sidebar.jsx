@@ -12,6 +12,7 @@ export default function Sidebar({ isShrink, selectedTab, setSelectedTab }) {
     "Orders",
     "Testimonials",
     "Users",
+    "Clients",
     "Logout",
   ]);
 

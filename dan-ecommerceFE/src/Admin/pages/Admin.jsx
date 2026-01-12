@@ -8,6 +8,7 @@ import Orders from "../layouts/orders/Orders";
 import Testimaonials from "../layouts/testimonials/Testimaonials";
 import Users from "../layouts/users/Users";
 import { useSelector } from "react-redux";
+import TrustedClients from "../layouts/trustedClients/trustedClients";
 
 
 export default function Admin() {
@@ -44,6 +45,8 @@ export default function Admin() {
                 return <Testimaonials/>;
             case "Users":
                 return <Users />;
+                 case "Clients":
+                return <TrustedClients />;
             default:
                 return <></>;
         }

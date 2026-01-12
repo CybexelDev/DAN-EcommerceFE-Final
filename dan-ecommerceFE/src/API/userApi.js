@@ -1,5 +1,6 @@
 import axios from 'axios';
 import api from '../axios/axiosinstence';
+import { toastError, toastSuccess } from '../utils/toast';
 // import api from './apiInstence';
 
 
@@ -112,9 +113,11 @@ export const addCart = async (userId, productId, quantity) => {
     });
 
     console.log(response.data, "cart add response >>>>>>>>>");
+    toastSuccess(response.data.message);
     return response.data;
   } catch (error) {
     console.error("Error adding to cart:", error);
+    toastError("Failed to add to cart. please login");
     throw error;
   }
 };
@@ -227,7 +230,6 @@ export const getBrand = async (fetchBrand) => {
   } catch (error) {
     res.status(500).json(error)
   }
-
 };
 
 
@@ -338,10 +340,9 @@ export const deleteAddress = async (userId, addressId) => {
     userId,
     addressId,
   });
+    toastSuccess("Address deleted successfully");
   return response.data;
 };
-
-
 
 
 export const checkoutSession = async (body) => {

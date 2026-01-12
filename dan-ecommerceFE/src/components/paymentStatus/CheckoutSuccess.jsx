@@ -9,7 +9,6 @@ import { saveOredr } from "../../API/userApi";
 function CheckoutSuccess() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
   const userId = useSelector((state) => state.auth.userId);
   const address = useSelector((state) => state.deliveryAddress);
   console.log(userId, "userId in checkoutsuccess page >>>>>>>");

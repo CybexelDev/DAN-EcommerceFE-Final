@@ -11,7 +11,6 @@ function ProductListCard({ id, image, title, price, click, isOpen }) {
   className={`w-full flex flex-col justify-between rounded-[.7rem] overflow-hidden 
     ${isOpen ? 'aspect-[4/5.5] md:aspect-[4/5.5] ' : 'aspect-[4/5] md:aspect-[4/5.5] '}`}
 >
-
       {/* Image Section */}
       <div className="relative w-full aspect-[4/4.7] bg-[#f4f4f4] flex justify-center rounded-[.7rem] items-center overflow-hidden">
         <img

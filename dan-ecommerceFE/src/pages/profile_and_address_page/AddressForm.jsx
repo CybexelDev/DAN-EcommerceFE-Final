@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { addAddress } from "../../API/userApi";
 import { useDispatch } from "react-redux";
 import { FaPencil } from "react-icons/fa6";
+import { toastError, toastSuccess } from "../../utils/toast";
 
 function AddressForm({ mode = "create", initialData = {}, onSubmit, onCancel }) {
   const [formData, setFormData] = useState({
@@ -22,49 +23,88 @@ function AddressForm({ mode = "create", initialData = {}, onSubmit, onCancel }) 
   const dispatch = useDispatch();
   const userId = localStorage.getItem("userId");
 
-  // ✅ Handle input change
+  // 🔹 Handle input change + clear error
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
   };
 
-  // ✅ Basic validation
+  // 🔹 Validate form
   const validateForm = () => {
     const newErrors = {};
+    let firstErrorField = null;
 
-    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!formData.phoneNumber.match(/^[0-9]{10}$/))
-      newErrors.phoneNumber = "Enter a valid 10-digit number";
-    if (!formData.pincode.match(/^[0-9]{5,6}$/))
-      newErrors.pincode = "Enter a valid pincode";
-    if (!formData.city.trim()) newErrors.city = "City is required";
-    if (!formData.state.trim()) newErrors.state = "State is required";
+    const setErr = (field, msg) => {
+      if (!firstErrorField) firstErrorField = field;
+      newErrors[field] = msg;
+    };
+
+    if (!formData.fullName.trim())
+      setErr("fullName", "Full name is required");
+
+    if (!/^[6-9]\d{9}$/.test(formData.phoneNumber))
+      setErr("phoneNumber", "Enter valid 10-digit mobile number");
+
+    if (!/^\d{6}$/.test(formData.pincode))
+      setErr("pincode", "Enter valid 6-digit pincode");
+
+    if (!formData.houseNo.trim())
+      setErr("houseNo", "House number is required");
+
+    if (!formData.area.trim())
+      setErr("area", "Area is required");
+
+    if (!formData.city.trim())
+      setErr("city", "City is required");
+
+    if (!formData.state.trim())
+      setErr("state", "State is required");
+
     if (!formData.addressType.trim())
-      newErrors.addressType = "Please choose address type";
+      setErr("addressType", "Select address type");
 
     setErrors(newErrors);
+
+    if (firstErrorField) {
+      document.querySelector(`[name="${firstErrorField}"]`)?.focus();
+    }
+
     return Object.keys(newErrors).length === 0;
   };
 
-  // ✅ Handle location checkbox
+  // 🔹 Use current location
   const handleLocationCheck = async (e) => {
     const checked = e.target.checked;
     setUseLocation(checked);
 
     if (checked && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (pos) => {
-        const { latitude, longitude } = pos.coords;
         try {
+          const { latitude, longitude } = pos.coords;
           const res = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
           );
           const data = await res.json();
-          const city =
-            data.address.city || data.address.town || data.address.village || "";
-          const state = data.address.state || "";
-          const pincode = data.address.postcode || "";
 
-          setFormData((prev) => ({ ...prev, city, state, pincode }));
+          setFormData((prev) => ({
+            ...prev,
+            city:
+              data.address.city ||
+              data.address.town ||
+              data.address.village ||
+              "",
+            state: data.address.state || "",
+            pincode: data.address.postcode || "",
+          }));
         } catch (err) {
           console.error("Location fetch failed", err);
         }
@@ -72,20 +112,21 @@ function AddressForm({ mode = "create", initialData = {}, onSubmit, onCancel }) 
     }
   };
 
-  // ✅ Handle submit
+  // 🔹 Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     try {
       if (onSubmit) onSubmit(formData, mode);
-      onCancel()
       await addAddress(userId, formData);
-      alert("✅ Address saved successfully!");
-
       dispatch({ type: "SET_TRUE" });
+      toastSuccess("Address saved successfully!");
+      // alert("✅ Address saved successfully!");
+      onCancel();
     } catch (error) {
-      alert("❌ Failed to add address. Please try again.");
+      toastError("Failed to add address. Please try again.");
+      // alert("❌ Failed to add address. Please try again.");
     }
   };
 
@@ -104,7 +145,7 @@ function AddressForm({ mode = "create", initialData = {}, onSubmit, onCancel }) 
         </h2>
       </div>
 
-      {/* Use location */}
+      {/* Use Location */}
       <label className="flex items-center gap-3 bg-[#EDE4FC] py-2 px-4 rounded-md cursor-pointer">
         <input
           type="checkbox"
@@ -112,129 +153,57 @@ function AddressForm({ mode = "create", initialData = {}, onSubmit, onCancel }) 
           onChange={handleLocationCheck}
           className="w-5 h-5 accent-[#F2591A]"
         />
-        <span className="font-semibold text-sm sm:text-base">
-          Use my current location
-        </span>
+        <span className="font-semibold">Use my current location</span>
       </label>
 
       {/* Fields */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
+        {[
+          ["fullName", "Full Name"],
+          ["phoneNumber", "10 digit Mobile Number"],
+          ["pincode", "Pincode"],
+          ["addressType", "Address Type (Home / Work / Other)"],
+          ["city", "City"],
+          ["state", "State"],
+          ["landmark", "Landmark"],
+          ["area", "Area"],
+        ].map(([name, placeholder]) => (
+          <div key={name}>
+            <input
+              type="text"
+              name={name}
+              placeholder={placeholder}
+              value={formData[name]}
+              onChange={handleChange}
+              readOnly={useLocation && ["city", "state", "pincode"].includes(name)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
+            />
+            {errors[name] && (
+              <p className="text-red-500 text-sm mt-1">{errors[name]}</p>
+            )}
+          </div>
+        ))}
+
+        <div className="sm:col-span-2">
           <input
             type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={formData.fullName}
+            name="houseNo"
+            placeholder="House No"
+            value={formData.houseNo}
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
           />
-          {errors.fullName && (
-            <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+          {errors.houseNo && (
+            <p className="text-red-500 text-sm mt-1">{errors.houseNo}</p>
           )}
         </div>
-
-        <div>
-          <input
-            type="tel"
-            name="phoneNumber"
-            placeholder="10 digit Mobile Number"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
-          />
-          {errors.phoneNumber && (
-            <p className="text-red-500 text-sm mt-1">{errors.phoneNumber}</p>
-          )}
-        </div>
-
-        <div>
-          <input
-            type="text"
-            name="pincode"
-            placeholder="Pincode"
-            value={formData.pincode}
-            onChange={handleChange}
-            readOnly={useLocation}
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
-          />
-          {errors.pincode && (
-            <p className="text-red-500 text-sm mt-1">{errors.pincode}</p>
-          )}
-        </div>
-
-        <div>
-          <input
-            type="text"
-            name="addressType"
-            list="addressTypeOptions"
-            placeholder="Address Type (Home / Work / Other)"
-            value={formData.addressType}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
-          />
-          <datalist id="addressTypeOptions">
-            <option value="Home" />
-            <option value="Work" />
-            <option value="Other" />
-          </datalist>
-          {errors.addressType && (
-            <p className="text-red-500 text-sm mt-1">{errors.addressType}</p>
-          )}
-        </div>
-
-        <input
-          type="text"
-          name="city"
-          placeholder="City/Town"
-          value={formData.city}
-          onChange={handleChange}
-          readOnly={useLocation}
-          className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
-        />
-
-        <input
-          type="text"
-          name="state"
-          placeholder="State"
-          value={formData.state}
-          onChange={handleChange}
-          readOnly={useLocation}
-          className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
-        />
-
-        <input
-          type="text"
-          name="landmark"
-          placeholder="Landmark"
-          value={formData.landmark}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
-        />
-
-        <input
-          type="text"
-          name="area"
-          placeholder="Area"
-          value={formData.area}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none"
-        />
-
-        <input
-          type="text"
-          name="houseNo"
-          placeholder="House No"
-          value={formData.houseNo}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F2591A] outline-none sm:col-span-2"
-        />
       </div>
 
       {/* Buttons */}
-      <div className="flex justify-start items-center gap-4 mt-4">
+      <div className="flex gap-4 mt-4">
         <button
           type="submit"
-          className="bg-[#F2591A] hover:bg-[#d94d10] text-white font-semibold py-2 px-6 rounded-full transition-all duration-300"
+          className="bg-[#F2591A] hover:bg-[#d94d10] text-white font-semibold py-2 px-6 rounded-full"
         >
           {mode === "edit" ? "UPDATE" : "SAVE"}
         </button>
