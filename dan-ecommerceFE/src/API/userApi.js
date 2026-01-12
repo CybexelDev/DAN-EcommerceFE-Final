@@ -230,7 +230,6 @@ export const getBrand = async (fetchBrand) => {
   } catch (error) {
     res.status(500).json(error)
   }
-
 };
 
 

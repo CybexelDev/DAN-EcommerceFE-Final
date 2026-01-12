@@ -297,3 +297,43 @@ export const dateBySale = async (startDate, endDate) => {
 
   return response.data;
 };
+
+export const getBrand = async (fetchBrand) => {
+  try {
+    const res = await adminApi.get(`admin/getBrand`);
+    console.log("ressssssssssssssssssssssssss", res);
+    fetchBrand(res.data.data);
+  } catch (error) {
+    res.status(500).json(error)
+  }
+};
+
+
+export const addBrand = async (formData) => {
+  try {
+    const response = await adminApi.post(`admin/addBrand`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error adding category:", error);
+    throw error;
+  }
+}
+
+
+export const deleteBrand = async (id) => {
+  try {
+    const response = await adminApi.delete(`admin/deleteBrand`, {
+      data: { brandId: id },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("Error deleting User:", error);
+  }
+};
