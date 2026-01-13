@@ -142,9 +142,9 @@ const ProductList = ({ isOpen, productData, productLengthdata }) => {
 
 
   {/* PAGINATION */}
-  <div className="flex items-center justify-center w-full">
+  <div className="flex items-center justify-center w-full d-block col-span-full">
       {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-7">
+        <div className="flex justify-center items-center gap-2 mt-4">
           {/* Previous */}
           <button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}

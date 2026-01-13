@@ -47,10 +47,11 @@ function Footer() {
                                     <h6 className='font-semibold'>Pages</h6>
                                 </div>
                                 <div className="h-[76.75%]  flex flex-col justify-between  ">
-                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55" onClick={() => navigate('/home')}>Home</div>
-                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55" onClick={() => navigate('/collections')}>Shop</div>
-                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55" onClick={() => navigate('/collections')}>Collections</div>
-                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55" onClick={() => navigate('/blog')} >Blog</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55 cursor-pointer" onClick={() => navigate('/')}>Home</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55 cursor-pointer" onClick={() => navigate('/collections')}>Collections</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55 cursor-pointer" onClick={() => navigate('/cart')}>Cart</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55 cursor-pointer" onClick={() => navigate('/blog')} >Blog</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.9rem,1.1rem,1.3rem)] lg:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55 cursor-pointer" onClick={() => navigate('/orders')} >Orders</div>
                                 </div>
                             </div>
                             <div className="w-[50%] md:w-[55%] flex flex-col ">
@@ -58,10 +59,10 @@ function Footer() {
                                     <h6 className=' font-semibold'>Information</h6>
                                 </div>
                                 <div className="h-[76.75%]  flex flex-col justify-between">
-                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55" onClick={() => navigate('/home')}>Terms&Conditions</div>
-                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55" onClick={() => navigate('/home')}>Privacy policy</div>
-                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55" onClick={() => navigate('/support')}>Support</div>
-                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold  text-black/55 " >404</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55 cursor-pointer" onClick={() => navigate('/terms-and-conditions')}>Terms&Conditions</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55 cursor-pointer" onClick={() => navigate('/privacy-policy')}>Privacy policy</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold text-black/55 cursor-pointer" onClick={() => navigate('/support')}>Support</div>
+                                    <div className="text-[clamp(1rem,1.1rem,1.3rem)] md:text-[clamp(.7rem,.9rem,1.1rem)] xl:text-[clamp(.9rem,1.1rem,1.3rem)] font-semibold  text-black/55 cursor-pointer" >404</div>
                                 </div>
                             </div>
                         </div>

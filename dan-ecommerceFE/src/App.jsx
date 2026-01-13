@@ -20,6 +20,8 @@ import Whatsapp from './components/wtsp/Whatsapp';
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TermsAndConditions from './pages/TermsAndConditions/TermsAndConditions';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 
 function App() {
 
@@ -46,6 +48,8 @@ function App() {
             <Route path="/address" element={<ProfileAndAddress />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/support" element={<SupportPage />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/login" element={<LoginAndSignup />} />
