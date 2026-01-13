@@ -122,7 +122,7 @@ import { useNavigate } from "react-router-dom";
               <ChevronRight className="w-4 h-4" />
             </button>
           )}
-          {onViewDetails && (
+          {/* {onViewDetails && (
             <button
               onClick={onViewDetails}
               className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-white bg-[#000] rounded-lg hover:bg-[#131313] transition-colors"
@@ -130,7 +130,7 @@ import { useNavigate } from "react-router-dom";
               Details
               <ChevronRight className="w-4 h-4" />
             </button>
-          )}
+          )} */}
         </div>
       </div>
     </div>

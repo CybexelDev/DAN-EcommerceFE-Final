@@ -443,8 +443,8 @@ function CollectionsPage() {
                                     {/* List category end */}
                                     {/* Category side end */}
                                 </div>
-                                {/* Products List Section */}
-                                <div className="w-[68%] h-[90%] ">
+                                {/* Products List Section h-[68%] */}
+                                <div className="w-[75%] h-[90%] ">
                                     <div className="w-full h-full flex justify-between ">
                                         <ProductList productLengthdata={setTotalProducts} productData={products} isOpen={isCategoryOpen} />
                                     </div>
