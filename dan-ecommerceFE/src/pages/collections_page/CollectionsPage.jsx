@@ -271,14 +271,14 @@ function CollectionsPage() {
     return (
 
         <div className='mx-[0%] '>
-            <div className='relative  w-full  pt-[5%]  lg:pt-[10.9%] mb-[3vw]  '>
+            <div className='relative  w-full  pt-[%]  lg:pt-[10.9%] mb-[3vw]  '>
                 <div className="hidden lg:block">
                     <Nav />
                 </div>
                 <div className="block lg:hidden ">
                     <MobileNav />
                 </div>
-                <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4 items-center justify-end pr-2  relative lg:absolute right-10 top-1 z-40`} />
+                <SubNav subMinDiv={`w-[100%] h-[35px] bg-[#fff] flex gap-4  md:items-center justify-end pr-2  relative lg:absolute right-10 top-1 z-40`} />
                 <div className="w-full h-full px-[3%]  ">
 
                     {/* Top bar Section  */}
@@ -293,7 +293,7 @@ function CollectionsPage() {
                                 <img
                                     src={listicon}
                                     alt=""
-                                    className="w-[100%] md:w-[60%] aspect-square"
+                                    className="w-[80%] md:w-[60%] aspect-square"
                                 />
                             </button>
 
@@ -331,7 +331,7 @@ function CollectionsPage() {
                             </div>
                         </div>
 
-                        <div className="relative  h-full w-[39.3%]  flex justify-between items-center">
+                        <div className="relative  h-full md:w-[39.3%] w-[55%] flex justify-between items-center">
                             <div className="w-[85.4%] h-full  flex justify-center items-center">
 
                                 {/* 🔹 Search Form */}
