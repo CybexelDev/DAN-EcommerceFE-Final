@@ -100,13 +100,13 @@ function CategoryList({ onFirstCategorySelect, id, sndSubcategoryId }) {
               </button>
             </div>
 
-            <div className="pl-[5%] py-[0.3rem] text-[.9rem] md:text-[1.3rem] lg:text-[1.6rem] cursor-pointer transition-all duration-500  ease-in-out">
+            <div className="pl-[5%] py-[0.3rem] text-[.9rem] md:text-[1.3rem] lg:text-[1.4rem] cursor-pointer transition-all duration-500  ease-in-out">
               <h5 className='text-[#F2591A] font-semibold truncate'>{item?.category?.toUpperCase()}</h5>
             </div>
             <div className={`w-full overflow-hidden transition-all duration-500 ease-in-out ${openSubcategory === item._id ? "max-h-[50vh] opacity-100" : "max-h-0 opacity-0"
               }`}>
               {openSubcategory === item._id ?
-                <ul className="pl-[6%] mt-[vw] flex flex-col gap-[.3vw] text-[.8rem] md:text-[1.2rem] lg:text-[1.4rem] font-semibold  text-black/80">
+                <ul className="pl-[6%] mt-[vw] flex flex-col gap-[.3vw] text-[.8rem] md:text-[1.2rem] lg:text-[1.1rem] font-semibold  text-black/80">
                   {item.subCategories.map((sub, index) => (
                     <li onClick={() => getSubCategory(sub._id)} key={index} className='w-full items-center  py-[0.3vw] flex hover:text-[#F2591A] cursor-pointer'>
                     {sub.name?.length > 20 ? sub.name.slice(0, 20) + '…' : sub.name.toUpperCase()}
