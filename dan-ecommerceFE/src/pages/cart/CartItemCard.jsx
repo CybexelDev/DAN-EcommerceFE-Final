@@ -44,7 +44,7 @@ function CartItemCard({ id, name, brand, image, price, qty, productId, onDelete,
             <button
               onClick={handleDecrease}
               disabled={qty <= 1}
-              className={`text-[clamp(1.2rem,1.6vw,1.3rem)] font-bold px-[0.5vw] transition ${
+              className={`text-[clamp(1.2rem,1.6vw,1.3rem)] font-bold px-[0.5vw] transition cursor-pointer ${
                 qty <= 1 ? "text-gray-400 cursor-not-allowed" : "hover:text-black text-gray-700"
               }`}
             >
@@ -57,7 +57,7 @@ function CartItemCard({ id, name, brand, image, price, qty, productId, onDelete,
 
             <button
               onClick={handleIncrease}
-              className="text-[clamp(1.2rem,1.6vw,1.3rem)] font-bold px-[0.5vw] hover:text-black text-gray-700 transition"
+              className="text-[clamp(1.2rem,1.6vw,1.3rem)] font-bold px-[0.5vw] hover:text-black text-gray-700 transition cursor-pointer"
             >
               +
             </button>
@@ -90,7 +90,7 @@ function CartItemCard({ id, name, brand, image, price, qty, productId, onDelete,
               e.stopPropagation();
               onDelete(id);
             }}
-            className="text-[clamp(1.5rem,2vw,1.8rem)] text-black hover:text-red-600 transition"
+            className="text-[clamp(1.5rem,2vw,1.8rem)] text-black hover:text-red-600 transition cursor-pointer" 
           >
             <RiDeleteBin6Fill />
           </button>

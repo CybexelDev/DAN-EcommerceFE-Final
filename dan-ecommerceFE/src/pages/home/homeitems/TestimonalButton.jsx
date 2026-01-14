@@ -15,7 +15,7 @@ function TestimonalButton({ onPrev, onNext, disablePrev, disableNext }) {
         <button
           onClick={onPrev}
           disabled={disablePrev}
-          className={`h-full aspect-square rounded-full flex items-center justify-center p-1 
+          className={`h-full aspect-square rounded-full flex cursor-pointer items-center justify-center p-1 
             ${disablePrev ? "bg-gray-300 cursor-not-allowed" : "bg-[#D8D8D8] hover:bg-black/20"}`}
         >
           <img src={leftarrow} alt="prev" className="w-[80%]" />
@@ -23,7 +23,7 @@ function TestimonalButton({ onPrev, onNext, disablePrev, disableNext }) {
         <button
           onClick={onNext}
           disabled={disableNext}
-          className={`h-full aspect-square rounded-full flex items-center justify-center p-1 
+          className={`h-full aspect-square rounded-full cursor-pointer flex items-center justify-center p-1 
             ${disableNext ? "bg-gray-300 cursor-not-allowed" : "bg-[#D8D8D8] hover:bg-black/20"}`}
         >
           <img src={rightarrow} alt="next" className="w-[80%]" />

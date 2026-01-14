@@ -52,7 +52,7 @@ function ProfileSection() {
                  after:-bottom-[1vw] after:-right-[0vw]">
         <button
           onClick={handleClick}
-          className="w-[88.28%] h-[56.66%] bg-[#D8D8D8] font-semibold text-[4vw] md:text-[3vw] lg:text-[1.3vw] text-center rounded-full hover:text-red-500 hover:scale-105 transition-all duration-300 ease-in-out"
+          className="w-[88.28%] h-[56.66%] bg-[#D8D8D8] font-semibold text-[4vw] md:text-[3vw] lg:text-[1.3vw] text-center rounded-full hover:text-red-500 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
         >
           { isOpen ? "Close" : "Open" }
         </button>
@@ -68,7 +68,7 @@ function ProfileSection() {
               <FaUser />
             </div>
             <div className="w-[65%] h-[75%] flex gap-[12%] items-center justify-start  ">
-              <div className=" text-[5vw] md:text-[4vw] lg:text-[1.3vw]  font-semibold text-[#F2591A]">
+              <div className=" text-[5vw] md:text-[4vw] lg:text-[1.3vw]  font-semibold text-[#F2591A] ">
                 LOGIN 
               </div>
               {/* <img className="w-[23.1%] aspect-square" src={selectedmark} alt="selected" /> */}
@@ -89,7 +89,7 @@ function ProfileSection() {
 
           {isOpen ? (
             <div className="w-full flex  lg:ml-[15%]  items-center justify-center md:justify-start  mt-[2vw]">
-              <button onClick={() => token ? handleLogout() : handleSignup()} className='w-[50%] md:w-[50%] lg:w-[60%] aspect-[5/1] bg-black text-white rounded-[4vw] md:rounded-[3vw] font-semibold text-[5vw] md:text-[5vw] lg:text-[1.9vw] xl:text-[1.5vw]
+              <button onClick={() => token ? handleLogout() : handleSignup()} className='w-[50%] cursor-pointer md:w-[50%] lg:w-[60%] aspect-[5/1] bg-black text-white rounded-[4vw] md:rounded-[3vw] font-semibold text-[5vw] md:text-[5vw] lg:text-[1.9vw] xl:text-[1.5vw]
                hover:text-orange-500 hover:scale-105 transition-all duration-300 ease-in-out '> {token? "Logout" : "Login"}</button>
             </div>
           ) : null}

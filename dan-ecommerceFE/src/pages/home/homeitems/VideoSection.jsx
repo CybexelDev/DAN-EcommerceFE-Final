@@ -37,7 +37,7 @@ function VideoSection() {
                                  after:-bottom-[1.5vw] after:right-[0vw]">
           {/* bouse button                         */}
         <button
-          className="w-[71.5%] aspect-square  flex justify-center bg-[#d8d8d8] rounded-full items-center"
+          className="w-[71.5%] aspect-square  flex justify-center bg-[#d8d8d8] rounded-full items-center cursor-pointer"
           onClick={togglePlay}>
           <img className="w-[50%] h-[50%] "
             src={isplaying ? pause : play} alt=" pause play btn" />

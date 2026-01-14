@@ -150,7 +150,7 @@ const ProductList = ({ isOpen, productData, productLengthdata }) => {
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
             className="px-4 py-2 rounded-md border text-sm font-medium 
-            text-gray-600 bg-white hover:bg-gray-100 disabled:opacity-40"
+            text-gray-600 bg-white hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
           >
             Prev
           </button>
@@ -162,7 +162,7 @@ const ProductList = ({ isOpen, productData, productLengthdata }) => {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`px-4 py-2 rounded-md border text-sm font-medium
+                className={`px-4 py-2 rounded-md border text-sm font-medium cursor-pointer
                 ${
                   currentPage === page
                     ? "bg-black text-white"
@@ -181,7 +181,7 @@ const ProductList = ({ isOpen, productData, productLengthdata }) => {
             }
             disabled={currentPage === totalPages}
             className="px-4 py-2 rounded-md border text-sm font-medium 
-            text-gray-600 bg-white hover:bg-gray-100 disabled:opacity-40"
+            text-gray-600 bg-white hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
           >
             Next
           </button>

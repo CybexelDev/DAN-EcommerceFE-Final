@@ -288,7 +288,7 @@ function CollectionsPage() {
                             {/* Category Button */}
                             <button
                                 onClick={categoryToggle}
-                                className="w-[16%] aspect-[50/45] bg-[#F2ECEC] rounded-[.5vw] flex justify-center items-center shadow-md"
+                                className="w-[16%] aspect-[50/45] bg-[#F2ECEC] rounded-[.5vw] flex justify-center items-center shadow-md cursor-pointer"
                             >
                                 <img
                                     src={listicon}

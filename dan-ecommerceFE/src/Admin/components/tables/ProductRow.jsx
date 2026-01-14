@@ -22,7 +22,7 @@ export default function ProductRow({ product, onEdit, onDelete }) {
             />
           </div>
           <div className="ml-4">
-            <div className="text-sm font-medium text-gray-900">
+            <div className="text-sm font-medium text-gray-900 truncate w-48">
               {product.productName}
             </div>
             <div className="text-sm text-gray-500">
