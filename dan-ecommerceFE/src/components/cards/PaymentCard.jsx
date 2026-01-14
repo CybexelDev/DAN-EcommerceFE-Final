@@ -15,7 +15,7 @@ function PaymentCard({ userIds, cart }) {
     const [productCart, setProductCart] = useState([]);
     const address = useSelector((state) => state.deliveryAddress);
 
-    console.log(address, "redux adresssssssssssssssssssssss");
+    // console.log(address, "redux adresssssssssssssssssssssss");
     
     // console.log(productCart, "code data >>>>>>>00000000000000000000");
 
@@ -101,7 +101,7 @@ function PaymentCard({ userIds, cart }) {
           onClick={fetchVoucher}
           className="bg-black text-white px-5 lg:px-[1.5vw] py-[3%] lg:py-[4%] rounded-[5vw] md:rounded-[4vw] lg:rounded-[2vw] font-semibold 
           text-[clamp(1.5rem,1.7rem,1.9vw)] md:text-[clamp(2rem,2.3vw,2.7rem)] lg:text-[clamp(1.3rem,1.5vw,1.7rem)]
-          hover:scale-[1.03] hover:bg-black/80 transition"
+          hover:scale-[1.03] hover:bg-black/80 transition cursor-pointer"
         >
           Apply
         </button>
@@ -169,7 +169,7 @@ function PaymentCard({ userIds, cart }) {
         onClick={makePayment}
         className="mt-6 bg-black text-white rounded-[5vw] md:rounded-[4vw] lg:rounded-[2vw] py-[4%] lg:py-[2%] font-semibold
         text-[clamp(1.3rem,1.5rem,1.7vw)] md:text-[clamp(2rem,2.5vw,3rem)] lg:text-[clamp(1.3rem,1.5rem,1.7rem)]
-        hover:scale-[1.02] hover:bg-black/80 transition-all"
+        hover:scale-[1.02] hover:bg-black/80 transition-all cursor-pointer"
       >
         Confirm & Pay
       </button>

@@ -85,7 +85,7 @@ function Testimonal() {
             <div
               className="
     flex items-center justify-center mb-4 
-    h-[30vw] sm:h-[28vw] md:h-[25vw] 
+    h-[20vw] sm:h-[28vw] md:h-[25vw] 
     overflow-hidden relative
   "
             >
@@ -106,7 +106,7 @@ function Testimonal() {
               <button
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
-                className={`absolute left-0 text-[7vw] font-semibold px-2 ${currentIndex === 0 ? "opacity-30" : "opacity-100"
+                className={`absolute left-0 text-[7vw] font-semibold cursor-pointer px-2 ${currentIndex === 0 ? "opacity-30" : "opacity-100"
                   }`}
               >
                 &lt;
@@ -142,7 +142,7 @@ function Testimonal() {
               <button
                 onClick={handleNext}
                 disabled={currentIndex === testimonals.length - 1}
-                className={`absolute right-0 text-[7vw] font-semibold px-2 ${currentIndex === testimonals.length - 1
+                className={`absolute right-0 text-[7vw] font-semibold cursor-pointer px-2 ${currentIndex === testimonals.length - 1
                     ? "opacity-30"
                     : "opacity-100"
                   }`}

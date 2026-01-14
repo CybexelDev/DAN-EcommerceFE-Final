@@ -195,7 +195,7 @@ const LoginForm = () => {
                       : "text-[3.5vw] md:text-[2vwvw] lg:text-[1.3vw] xl:text-[1.1vw] font-semibold top-1/2 -translate-y-1/2 p-[1vw]"
                   }`}
               >
-                Enter Email / Mobile number
+                Enter your Email 
               </label>
             </div>
 
@@ -208,7 +208,7 @@ const LoginForm = () => {
             <button
               type="submit"
               className="w-[80%] lg:w-[67%] bg-black text-white text-[3.7vw] md:text-[3vw] lg:text-[1.5vw] xl:text-[1.3vw] py-[2vw] lg:py-[.7vw]
-                         rounded-[2vw] lg:rounded-[.7vw] font-semibold hover:brightness-110 transition self-center lg:self-start"
+                         rounded-[2vw] lg:rounded-[.7vw] font-semibold hover:brightness-110 transition self-center lg:self-start cursor-pointer"
             >
               LOGIN
             </button>
@@ -230,7 +230,7 @@ const LoginForm = () => {
                       : "text-[2.5vw] md:text-[2vw] lg:text-[1.3vw] xl:text-[1.1vw] font-semibold top-1/2 -translate-y-1/2 p-[1vw]"
                   }`}
               >
-                Enter Email / Mobile number
+                Enter your Email
               </label>
             </div>
             
@@ -267,7 +267,7 @@ const LoginForm = () => {
             <button
               type="submit"
               className="w-[80%] lg:w-[67%] bg-black text-white md:text-[3.5vw] lg:text-[1.5vw] py-[3vw] lg:py-[.7vw]
-                         rounded-[2vw] lg:rounded-[.7vw] font-semibold hover:brightness-110 transition self-center lg:self-start"
+                         rounded-[2vw] lg:rounded-[.7vw] font-semibold hover:brightness-110 transition self-center lg:self-start cursor-pointer"
             >
               LOGIN
             </button>

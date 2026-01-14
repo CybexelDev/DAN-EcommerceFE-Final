@@ -40,10 +40,10 @@ function TestimonialCard({ image, quote, rating, name }) {
           </div>
         </div>
         <div className="w-full h-[48%] text-center px-[10%]">
-          <p className="text-[clamp(1.1rem,1.3vw,1.5rem)] lg:text-[clamp(2.1rem,2.3vw,2.5rem)] font-semibold">{quote}</p>
+          <p className="text-[clamp(1.1rem,1.3vw,1.5rem)] lg:text-[25px] font-semibold">{quote}</p>
         </div>
       </div>
-      <div className="w-full h-[18%] lg:mt-[40px] flex flex-col justify-between ">
+      <div className="w-full h-[18%] lg:mt-[10px] flex flex-col justify-between ">
         <div className="h-[33%] text-center  flex justify-center gap-[.3vw]">
           {renderStars(rating)}
         </div>

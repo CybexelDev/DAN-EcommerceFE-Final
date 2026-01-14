@@ -20,7 +20,7 @@ function LoginSignupToggleCard({isLogin, toggleButton}) {
       {isLogin ? "Don't have an account?" : "Already have an account?"}
     </p>
     <button
-      className="mt-[1vw] px-[7vw] md:px-[9vw] xl:px-[3vw] py-[1vw] text-[4vw] xl:text-[1.3vw] bg-black text-white rounded-[1.5vw] font-semibold  shadow hover:scale-110 transition"
+      className="mt-[1vw] px-[7vw] md:px-[9vw] xl:px-[3vw] py-[1vw] text-[4vw] xl:text-[1.3vw] bg-black text-white rounded-[1.5vw] font-semibold  shadow hover:scale-110 transition cursor-pointer"
       onClick={toggleButton}
     >
       {isLogin ? "SignUp" : "Login"}

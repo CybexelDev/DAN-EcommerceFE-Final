@@ -7,7 +7,7 @@ function HeroButton({ onPrev, onNext, disablePrev, disableNext }) {
     <div className="w-full h-full flex items-center justify-between">
       {/* Prev Button */}
       <button
-        className={`w-full h-full flex justify-center items-center hover:scale-105 ${
+        className={`w-full h-full flex justify-center items-center hover:scale-105 cursor-pointer ${
           disablePrev ? "opacity-40 cursor-not-allowed" : ""
         }`}
         onClick={onPrev}
@@ -18,7 +18,7 @@ function HeroButton({ onPrev, onNext, disablePrev, disableNext }) {
 
       {/* Next Button */}
       <button
-        className={`w-full h-full flex justify-center items-center hover:scale-105 ${
+        className={`w-full h-full flex justify-center items-center hover:scale-105 cursor-pointer ${
           disableNext ? "opacity-40 cursor-not-allowed" : ""
         }`}
         onClick={onNext}
