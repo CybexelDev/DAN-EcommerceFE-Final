@@ -67,7 +67,7 @@ const MostPopularCard = ({ image, title, offer, price, click }) => {
         <h6
           className="
             text-[clamp(.9rem,1.1vw,1.3rem)] lg:text-[clamp(1rem,1.5vw,1.9rem)]
-            font-bold 
+            font-semibold
           "
         >
           {offer}% OFF

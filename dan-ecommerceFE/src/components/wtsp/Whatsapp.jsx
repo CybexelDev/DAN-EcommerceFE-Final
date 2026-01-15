@@ -5,7 +5,7 @@ import { MessageCircle } from 'lucide-react';
 const Whatsapp = () => {
     return (
         <>
-            <a href="https://api.whatsapp.com/send?phone=+9710509836868&text=Hi%21%20this%20m%C3%from%20DnadarTrading" class="float" target="_blank">
+            <a href="https://api.whatsapp.com/send?phone=+971509836868&text=Hi this from DaralnahdaTrading" class="float" target="_blank">
                 <MessageCircle className='my-float' />
             </a>
         </>
