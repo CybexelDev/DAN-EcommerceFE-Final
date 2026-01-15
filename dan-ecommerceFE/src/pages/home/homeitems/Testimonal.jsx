@@ -4,6 +4,7 @@ import TestimonalButton from "./TestimonalButton";
 import TestimonalClients from "./TestimonalClients";
 import { getBrand, getTestimaonial } from "../../../API/userApi";
 import  './testimanial.css'
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 function Testimonal() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -69,7 +70,7 @@ function Testimonal() {
       </div>
 
       {/* ---------- 📱 MOBILE/TABLET VIEW ---------- */}
-      <div className="flex md:hidden bg-white flex-col w-full">
+      <div className="flex md:hidden  flex-col w-full">
 
         {/* ✅ Container 1 - Testimonial */}
         <div className="bg-black/10 w-full rounded-[4vw] shadow-sm px-4 py-6">
@@ -109,7 +110,7 @@ function Testimonal() {
                 className={`absolute left-0 text-[7vw] font-semibold cursor-pointer px-2 ${currentIndex === 0 ? "opacity-30" : "opacity-100"
                   }`}
               >
-                &lt;
+                <ChevronLeft />
               </button>
 
               {/* Content */}
@@ -147,7 +148,7 @@ function Testimonal() {
                     : "opacity-100"
                   }`}
               >
-                &gt;
+                <ChevronRight />
               </button>
             </div>
           </div>

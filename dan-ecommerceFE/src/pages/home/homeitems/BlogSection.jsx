@@ -39,7 +39,7 @@ function BlogSection() {
             {/* Main Blog Section */}
             {blogs.length > 0 && (
                 <div
-                    className="w-full lg:aspect-[1440/500] flex flex-col lg:flex-row cursor-pointer shadow my-[7vw] md:my-[3vw]"
+                    className="w-full lg:aspect-[1440/500] flex flex-col lg:flex-row cursor-pointer my-[7vw] md:my-[3vw]"
                     onClick={() => setSelectedBlog(blogs[0])}
                 >
                     {/* Image Section */}

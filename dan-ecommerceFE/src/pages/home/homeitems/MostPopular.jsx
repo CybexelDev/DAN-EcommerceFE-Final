@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 function MostPopular() {
   const [popularProducts, setPopularProducts] = useState([]);
+  console.log(popularProducts, "most popular products >>>>>>");
+  
   const navigate = useNavigate();
 
   useEffect(() => {

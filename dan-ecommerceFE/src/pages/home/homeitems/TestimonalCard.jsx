@@ -40,7 +40,7 @@ function TestimonialCard({ image, quote, rating, name }) {
           </div>
         </div>
         <div className="w-full h-[48%] text-center px-[10%]">
-          <p className="text-[clamp(1.1rem,1.3vw,1.5rem)] lg:text-[25px] font-semibold">{quote}</p>
+          <p className="text-[clamp(1.1rem,1.3vw,1.5rem)] italic lg:text-[25px] font-semibold">"{quote}"</p>
         </div>
       </div>
       <div className="w-full h-[18%] lg:mt-[10px] flex flex-col justify-between ">

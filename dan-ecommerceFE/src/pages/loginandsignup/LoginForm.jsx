@@ -177,15 +177,15 @@ const LoginForm = () => {
     >
        {step === 1 ? (
           <>
-            <div className="relative  flex items-center justify-center">
+            <div className="relative  flex items-center bg-white justify-center rounded-[2vw] lg:rounded-[1vw]">
               <input
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                className="w-full h-[15vw] lg:h-[4.5vw] bg-white border-gray-400 rounded-[2vw] lg:rounded-[1vw]
-                           outline-none pt-[5vw] lg:pt-[4vw] xl:pt-[2.8vw] pb-[2vw] pl-[4vw] lg:pl-[1.5vw] text-[6vw] md:text-[5vw] lg:text-[2vw] xl:text-[1.7vw]"
+                className="w-full h-[15vw] lg:h-[4.5vw] bg-transparent border-gray-400 rounded-[2vw] lg:rounded-[1vw]
+                           outline-none pt-[5vw] lg:pt-[4vw] xl:pt-[2.8vw] pb-[2vw] pl-[4vw] lg:pl-[1.5vw] text-[6vw] md:text-[5vw] lg:text-[2vw] xl:text-[1.7vw] z-10"
               />
               <label
                 className={`absolute left-4 transition-all duration-200 text-[#484848]
