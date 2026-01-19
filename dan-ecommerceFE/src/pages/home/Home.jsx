@@ -17,20 +17,20 @@ function Home() {
       <SubNav subMinDiv="w-[100%] h-[35px] bg-transparent flex gap-4 items-center justify-end pr-2 relative lg:absolute block right-2 md:right-15 top-[1px] md:top-1 z-40" />
         <Hero />
       </div>
+       <div className="md:pb-[2%] pb-[7%] ">
+        <Collections />
+      </div>
       <div className="pb-[2%]">
         <MostPopular />
       </div>
-      <div className="md:pb-[4%] pb-[7%] ">
-        <Testimonal />
-      </div>
-      <div className="md:pb-[2%] pb-[7%] ">
-        <Collections />
-      </div>
-      <div className="md:pb-[4%] pb-[10%]">
+       <div className="md:pb-[4%] pb-[10%]">
         <VideoSection />
       </div>
-      <div className="pb-[10%] md:pb-[0%]">
+        <div className="pb-[10%] md:pb-[0%]">
         <FeaturesSection />
+      </div>
+      <div className="md:pb-[4%] pb-[7%] ">
+        <Testimonal />
       </div>
       <div className="pb-[5%] md:pb-[0%]">
         <BlogSection />
