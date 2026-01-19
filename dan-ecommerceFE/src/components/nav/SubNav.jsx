@@ -8,10 +8,10 @@ const SubNav = ({subMinDiv}) => {
     return (
         <>
             <div className={subMinDiv}>
-                <a className='text-[#000] text-[13px] font-medium flex gap-1' href='tel:+9710509836868'>
-                    <Phone className="w-3 h-3 text-[#000] mt-[6px]" /> +971 0509836868</a>
-                <a className='text-[#000] text-[13px] font-medium flex gap-1' href='tel:+9710559688846'>
-                    <Phone className="w-3 h-3 text-[#000] mt-[6px]" /> +971 0559688846</a>
+                <a className='text-[#000] text-[13px] font-medium flex gap-1' href='tel:+971509836868'>
+                    <Phone className="w-3 h-3 text-[#000] mt-[6px]" /> +971 509836868</a>
+                <a className='text-[#000] text-[13px] font-medium flex gap-1' href='tel:+971559688846'>
+                    <Phone className="w-3 h-3 text-[#000] mt-[6px]" /> +971 559688846</a>
 
                 {token ?
                     <></>
