@@ -19,7 +19,7 @@ function Collections() {
       <div className="flex flex-wrap justify-between items-center mb-[6%] md:mb-[4%] ">
         <div className="flex flex-col justify-start">
           <h3 className="text-[clamp(1.3rem,1.5vw,1.7rem)] lg:text-[clamp(1.5rem,1.7vw,1.9rem)] font-semibold">
-            Our Collections
+            Our Products
           </h3>
           <p className="text-[clamp(.9rem,1.1vw,1.3rem)] lg:text-[clamp(1rem,1.5vw,1.9rem text-gray-500">
             Showcase all of the different collections you have to offer.
